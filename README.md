@@ -1,1 +1,1 @@
-# sphinx-theme
+# IATI Sphinx Theme
