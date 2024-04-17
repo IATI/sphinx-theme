@@ -6,6 +6,16 @@ build-backend = "flit_core.buildapi"
 name = "iati_sphinx_theme"
 readme = "README.md"
 dynamic = ["version", "description"]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["black", "isort", "flake8", "Flake8-pyproject"]
 
 [project.entry-points."sphinx.html_themes"]
 iati_sphinx_theme = "iati_sphinx_theme"
+
+[tool.isort]
+profile = "black"
+
+[tool.flake8]
+max-line-length = 88
