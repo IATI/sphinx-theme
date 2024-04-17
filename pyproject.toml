@@ -9,7 +9,13 @@ dynamic = ["version", "description"]
 dependencies = []
 
 [project.optional-dependencies]
-dev = ["black", "isort", "flake8", "Flake8-pyproject"]
+dev = [
+    "black",
+    "isort",
+    "flake8",
+    "Flake8-pyproject",
+    "sphinx-autobuild"
+]
 
 [project.entry-points."sphinx.html_themes"]
 iati_sphinx_theme = "iati_sphinx_theme"

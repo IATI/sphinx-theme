@@ -4,24 +4,58 @@
 #
 #    pip-compile --extra=dev --output-file=requirements_dev.txt pyproject.toml
 #
+alabaster==0.7.16
+    # via sphinx
+anyio==4.3.0
+    # via
+    #   starlette
+    #   watchfiles
+babel==2.14.0
+    # via sphinx
 black==24.4.0
     # via iati_sphinx_theme (pyproject.toml)
+certifi==2024.2.2
+    # via requests
+charset-normalizer==3.3.2
+    # via requests
 click==8.1.7
-    # via black
+    # via
+    #   black
+    #   uvicorn
+colorama==0.4.6
+    # via sphinx-autobuild
+docutils==0.21.1
+    # via sphinx
+exceptiongroup==1.2.0
+    # via anyio
 flake8==7.0.0
     # via
     #   flake8-pyproject
     #   iati_sphinx_theme (pyproject.toml)
 flake8-pyproject==1.2.3
     # via iati_sphinx_theme (pyproject.toml)
+h11==0.14.0
+    # via uvicorn
+idna==3.7
+    # via
+    #   anyio
+    #   requests
+imagesize==1.4.1
+    # via sphinx
 isort==5.13.2
     # via iati_sphinx_theme (pyproject.toml)
+jinja2==3.1.3
+    # via sphinx
+markupsafe==2.1.5
+    # via jinja2
 mccabe==0.7.0
     # via flake8
 mypy-extensions==1.0.0
     # via black
 packaging==24.0
-    # via black
+    # via
+    #   black
+    #   sphinx
 pathspec==0.12.1
     # via black
 platformdirs==4.2.0
@@ -30,9 +64,47 @@ pycodestyle==2.11.1
     # via flake8
 pyflakes==3.2.0
     # via flake8
+pygments==2.17.2
+    # via sphinx
+requests==2.31.0
+    # via sphinx
+sniffio==1.3.1
+    # via anyio
+snowballstemmer==2.2.0
+    # via sphinx
+sphinx==7.3.5
+    # via sphinx-autobuild
+sphinx-autobuild==2024.4.16
+    # via iati_sphinx_theme (pyproject.toml)
+sphinxcontrib-applehelp==1.0.8
+    # via sphinx
+sphinxcontrib-devhelp==1.0.6
+    # via sphinx
+sphinxcontrib-htmlhelp==2.0.5
+    # via sphinx
+sphinxcontrib-jsmath==1.0.1
+    # via sphinx
+sphinxcontrib-qthelp==1.0.7
+    # via sphinx
+sphinxcontrib-serializinghtml==1.1.10
+    # via sphinx
+starlette==0.37.2
+    # via sphinx-autobuild
 tomli==2.0.1
     # via
     #   black
     #   flake8-pyproject
+    #   sphinx
 typing-extensions==4.11.0
-    # via black
+    # via
+    #   anyio
+    #   black
+    #   uvicorn
+urllib3==2.2.1
+    # via requests
+uvicorn==0.29.0
+    # via sphinx-autobuild
+watchfiles==0.21.0
+    # via sphinx-autobuild
+websockets==12.0
+    # via sphinx-autobuild
