@@ -14,7 +14,9 @@ dev = [
     "isort",
     "flake8",
     "Flake8-pyproject",
-    "sphinx-autobuild"
+    "mypy",
+    "sphinx-autobuild",
+    "types-docutils"
 ]
 
 [project.entry-points."sphinx.html_themes"]
@@ -25,3 +27,6 @@ profile = "black"
 
 [tool.flake8]
 max-line-length = 88
+
+[tool.mypy]
+strict = true
