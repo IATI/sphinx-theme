@@ -1,0 +1,39 @@
+@use "pkg:iati-design-system" as ds;
+
+.admonition,
+.topic,
+.versionadded,
+.versionchanged,
+div.deprecated {
+  @extend .iati-callout;
+}
+
+.admonition-title,
+.topic-title {
+  @extend .iati-callout__title;
+}
+
+.attention,
+.caution,
+.warning,
+.versionchanged {
+  @extend .iati-callout--orange;
+}
+
+.danger,
+.error,
+div.deprecated {
+  @extend .iati-callout--red;
+}
+
+.versionadded {
+  @extend .iati-callout--green;
+}
+
+.tip {
+  @extend .iati-callout--purple;
+}
+
+.versionmodified {
+  font-weight: bold;
+}
