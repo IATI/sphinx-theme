@@ -2,3 +2,6 @@
 .ve
 __pycache__
 dist
+
+# Node
+node_modules
