@@ -7,6 +7,11 @@ build:
   os: ubuntu-22.04
   tools:
     python: "3.10"
+    nodejs: "20"
+  jobs:
+    pre_install:
+      - npm ci
+      - npm run build
 
 sphinx:
   configuration: docs/conf.py
