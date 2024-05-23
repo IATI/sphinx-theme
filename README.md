@@ -25,13 +25,15 @@ flake8 iati_sphinx_theme
 
 ### Documentation with live preview
 
-1. Install the theme locally:
+1. In one terminal, build the CSS in watch mode
+
+   ```
+   npm run build:watch
+   ```
+
+2. In a separate terminal, install the Sphinx theme then start the docs development server:
 
    ```
    pip install -e .
-   ```
-
-2. Start the docs development server:
-   ```
    sphinx-autobuild -a docs docs/_build/html --watch iati_sphinx_theme/
    ```
