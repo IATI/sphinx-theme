@@ -23,6 +23,12 @@
   </div>
 {% endblock %}
 
+{%- block content %}
+  <main class="iati-main">
+    {{ super() }}
+  </main>
+{% endblock %}
+
 {%- block footer %}
   <footer class="iati-footer" role="contentinfo">
     <div>
