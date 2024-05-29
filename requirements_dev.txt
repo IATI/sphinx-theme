@@ -50,8 +50,12 @@ markupsafe==2.1.5
     # via jinja2
 mccabe==0.7.0
     # via flake8
+mypy==1.10.0
+    # via iati_sphinx_theme (pyproject.toml)
 mypy-extensions==1.0.0
-    # via black
+    # via
+    #   black
+    #   mypy
 packaging==24.0
     # via
     #   black
@@ -94,11 +98,15 @@ tomli==2.0.1
     # via
     #   black
     #   flake8-pyproject
+    #   mypy
     #   sphinx
+types-docutils==0.21.0.20240423
+    # via iati_sphinx_theme (pyproject.toml)
 typing-extensions==4.11.0
     # via
     #   anyio
     #   black
+    #   mypy
     #   uvicorn
 urllib3==2.2.1
     # via requests
