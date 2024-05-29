@@ -22,3 +22,40 @@
     </div>
   </div>
 {% endblock %}
+
+{%- block footer %}
+  <footer class="iati-footer" role="contentinfo">
+    <div>
+      <a href="https://iatistandard.org/">
+        <img
+          src="http://styles.iatistandard.org/assets/svg/source/logo-white.svg"
+          class="iati-footer__logo"
+        />
+      </a>
+    </div>
+    <hr />
+    <div>
+      <div>
+        {{- copyright_block() -}}
+        Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> {{ sphinx_version }}.
+      </div>
+      <div>
+        <a href="https://twitter.com/IATI_aid" aria-label="Twitter">
+          <i class="iati-icon iati-icon--twitter"></i>
+        </a>
+        <a
+          href="https://www.youtube.com/channel/UCAVH1gcgJXElsj8ENC-bDQQ"
+          aria-label="YouTube"
+        >
+          <i class="iati-icon iati-icon--youtube"></i>
+        </a>
+        <a
+          href="https://www.linkedin.com/company/international-aid-transparency-initiative/"
+          aria-label="LinkedIn"
+        >
+          <i class="iati-icon iati-icon--linkedin"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+{%- endblock %}
