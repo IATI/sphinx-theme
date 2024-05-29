@@ -1,0 +1,66 @@
+@use "pkg:iati-design-system" as ds;
+
+.centered {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.rubric {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.line-block {
+  margin: ds.$padding-block 0;
+
+  .line-block {
+    margin: 0;
+    padding-left: ds.$padding-block;
+  }
+}
+
+.headerlink {
+  color: ds.$color-grey-40;
+  text-decoration: none;
+  padding-left: ds.$padding-block;
+
+  &:hover {
+    color: ds.$color-grey-90;
+  }
+}
+
+.guilabel {
+  background-color: ds.$color-teal-10;
+  border: 1px solid ds.$color-teal-70;
+  font-size: 0.9em;
+  padding: 0 0.2em;
+  border-radius: 0.2em;
+}
+
+// API Documentation
+
+.sig {
+  @extend .iati-code;
+  display: inline-block;
+  color: ds.$color-grey-60;
+
+  .sig-name {
+    color: ds.$color-grey-90;
+    font-weight: bold;
+  }
+}
+
+// Code Blocks
+
+span.linenos {
+  color: ds.$color-grey-50;
+  margin-right: ds.$padding-block;
+}
+
+.code-block-caption {
+  text-align: center;
+  font-style: italic;
+}

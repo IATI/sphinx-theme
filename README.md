@@ -3,11 +3,13 @@
 ## Development
 
 ### Install dependencies
+
 ```
 pip install -r requirements_dev.txt
 ```
 
 ### Update dependencies
+
 ```
 python -m piptools compile --extra=dev -o requirements_dev.txt pyproject.toml
 pip install -r requirements_dev.txt
@@ -23,12 +25,15 @@ flake8 iati_sphinx_theme
 
 ### Documentation with live preview
 
-1. Install the theme locally:
-    ```
-    pip install -e .
-    ```
+1. In one terminal, build the CSS in watch mode
 
-2. Start the docs development server:
-    ```
-    sphinx-autobuild docs docs/_build/html
-    ```
+   ```
+   npm run build:watch
+   ```
+
+2. In a separate terminal, install the Sphinx theme then start the docs development server:
+
+   ```
+   pip install -e .
+   sphinx-autobuild -a docs docs/_build/html --watch iati_sphinx_theme/
+   ```

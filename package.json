@@ -1,0 +1,11 @@
+{
+  "name": "sphinx-theme",
+  "scripts": {
+    "build": "sass --pkg-importer=node --style=expanded --no-source-map styles/main.scss:iati_sphinx_theme/static/iati.css",
+    "build:watch": "npm run build -- --watch"
+  },
+  "devDependencies": {
+    "iati-design-system": "1.0.0",
+    "sass": "^1.75.0"
+  }
+}

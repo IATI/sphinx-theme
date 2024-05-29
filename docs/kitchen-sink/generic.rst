@@ -152,7 +152,7 @@ References
 ==========
 
 Footnotes
-~~~~~~~~~~~
+---------
 
 Here we have a footnote. [#doubleColon]_
 
