@@ -1,0 +1,35 @@
+@use "pkg:iati-design-system" as *;
+
+.globaltoc {
+  @extend .iati-card;
+  margin: $padding-block;
+  flex: 0 0 250px;
+  align-self: flex-start;
+
+  & .caption {
+    @extend .iati-card__subtitle;
+
+    .caption-text {
+      font-style: normal;
+    }
+
+    &:not(:first-of-type) {
+      margin-top: $padding-block;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+
+    li li {
+      padding-left: $padding-block;
+    }
+
+    a.current {
+      font-weight: bold;
+      text-decoration: none;
+    }
+  }
+}

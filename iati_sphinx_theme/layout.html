@@ -25,9 +25,12 @@
 
 {%- block relbar1 %}{% endblock %}
 {%- block relbar2 %}{% endblock %}
+{%- block sidebar1 %}{% endblock %}
+{%- block sidebar2 %}{% endblock %}
 
 {%- block content %}
   <main class="iati-main">
+    {%- include "globaltoc.html" %}
     {{ super() }}
   </main>
 {% endblock %}
