@@ -11,4 +11,8 @@ aside.sidebar {
   & .sidebar-title {
     @extend .iati-card__title;
   }
+
+  & .sidebar-subtitle {
+    @extend .iati-card__subtitle;
+  }
 }
