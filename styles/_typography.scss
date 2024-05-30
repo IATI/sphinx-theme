@@ -63,3 +63,9 @@ span.linenos {
   text-align: center;
   font-style: italic;
 }
+
+// Description Lists
+
+dl dt .classifier::before {
+  content: " : ";
+}
