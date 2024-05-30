@@ -6,6 +6,11 @@
   flex: 0 0 250px;
   align-self: flex-start;
 
+  display: none;
+  @media (min-width: 1000px) {
+    display: block;
+  }
+
   & .caption {
     @extend .iati-card__subtitle;
 
