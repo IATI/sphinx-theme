@@ -1,0 +1,17 @@
+@use "pkg:iati-design-system" as *;
+
+.iati-main {
+  display: flex;
+  padding: 0;
+}
+
+.document {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.documentwrapper {
+  flex-grow: 1;
+  padding: $padding-block;
+}

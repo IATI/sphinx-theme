@@ -23,10 +23,18 @@
   </div>
 {% endblock %}
 
+{%- block relbar1 %}{% endblock %}
+{%- block relbar2 %}{% endblock %}
+
 {%- block content %}
   <main class="iati-main">
     {{ super() }}
   </main>
+{% endblock %}
+
+{%- block document %}
+  {{ super() }}
+  {%- include "relations.html" %}
 {% endblock %}
 
 {%- block footer %}
