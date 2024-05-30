@@ -151,6 +151,8 @@ Code with Sidebar
 References
 ==========
 
+.. _footnotes:
+
 Footnotes
 ---------
 
@@ -173,7 +175,7 @@ and ``]_``.  This follow the basic pattern in restructured text to use concise
 symbol combinations inside a paragraph that are unlikely to appear in normal text.
 
 There is also simple markup to do hyperlinks, both to web URL's and as
-cross references within a Sphinx document, like to :ref:`transformation`.
+cross references within a Sphinx document, like to :ref:`footnotes`.
 
 More elaborate documents by some of the authors are
 http://introcs.cs.luc.edu and
