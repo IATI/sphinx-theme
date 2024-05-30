@@ -1,0 +1,29 @@
+@use "pkg:iati-design-system" as *;
+
+.centered {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.align-right {
+  float: right;
+  clear: right;
+  margin-left: $padding-block;
+}
+
+.align-left {
+  float: left;
+  clear: left;
+  margin-right: $padding-block;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-default {
+  margin: 0;
+}

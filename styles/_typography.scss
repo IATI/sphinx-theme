@@ -1,13 +1,5 @@
 @use "pkg:iati-design-system" as ds;
 
-.centered {
-  text-align: center;
-}
-
-.right {
-  text-align: right;
-}
-
 .rubric {
   font-weight: bold;
   font-size: 1.2em;
@@ -60,11 +52,14 @@ span.linenos {
   margin-right: ds.$padding-block;
 }
 
-.code-block-caption {
-  text-align: center;
-  font-style: italic;
-}
-
 .highlight {
   background: none;
+}
+
+// Captions
+
+.code-block-caption,
+.caption-text {
+  text-align: center;
+  font-style: italic;
 }
