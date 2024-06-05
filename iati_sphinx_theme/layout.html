@@ -1,22 +1,22 @@
 {% extends "basic/layout.html" %}
 
 {%- block header %}
-  <header class="iati-header">
-    <div>
-      <a href="/">
-        <img
-          src="http://styles.iatistandard.org/assets/svg/source/logo-colour.svg"
-          class="iati-header__logo"
-        />
-      </a>
-    </div>
-    <ul class="iati-header__nav">
-      <li class="iati-header__nav-item">
-        <a href="{{ pathto('search') }}">Search</a>
-      </li>
-    </ul>
-  </header>
   <div class="iati-title-bar">
+    <header class="iati-header">
+      <div>
+        <a href="/">
+          <img
+            src="http://styles.iatistandard.org/assets/svg/source/logo-colour.svg"
+            class="iati-header__logo"
+          />
+        </a>
+      </div>
+      <ul class="iati-header__nav">
+        <li class="iati-header__nav-item">
+          <a href="{{ pathto('search') }}">Search</a>
+        </li>
+      </ul>
+    </header>
     <div class="iati-title-bar__title">
       {{ _(project) }}
     </div>
