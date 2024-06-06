@@ -1,6 +1,10 @@
 # IATI Sphinx Theme
 
-## Development
+## How do I use IATI Sphinx Theme?
+
+Please see the [IATI Sphinx Theme Documentation](https://iati-sphinx-theme.readthedocs.io/en/latest/) for usage instructions.
+
+## How do I contribute to IATI Sphinx Theme?
 
 ### Install dependencies
 
@@ -37,4 +41,35 @@ mypy iati_sphinx_theme/
    ```
    pip install -e .
    sphinx-autobuild -a docs docs/_build/html --watch iati_sphinx_theme/
+   ```
+
+### Testing a local version of the theme against another project
+
+To run a local version of the theme with another project, e.g. `my-docs`, take the following steps:
+
+1. Clone the `sphinx-theme` repository, and checkout the branch or tag you want to use.
+
+2. Run the following command in the `sphinx-theme` directory, to build the CSS for the theme.
+
+   ```
+   npm run build
+   ```
+
+3. Go to `my-docs` directory, and install the Sphinx theme
+
+   ```
+   pip install -e /path/to/sphinx-theme
+   ```
+
+4. Set the `html_theme` option in your `conf.py`
+
+   ```python
+   html_theme = "iati_sphinx_theme"
+   ```
+
+5. Start the docs development server:
+
+   ```
+   pip install sphinx-autobuild
+   sphinx-autobuild docs docs/_build/html
    ```
