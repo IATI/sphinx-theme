@@ -40,7 +40,9 @@
 
 {%- block document %}
   {{ super() }}
-  {%- include "relations.html" %}
+  {%- if theme_show_relations|tobool %}
+    {%- include "relations.html" %}
+  {%- endif %}
 {% endblock %}
 
 {%- block footer %}
