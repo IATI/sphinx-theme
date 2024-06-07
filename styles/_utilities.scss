@@ -1,0 +1,51 @@
+/* Generic utilities which Sphinx expects to be available */
+
+@use "pkg:iati-design-system" as *;
+
+// List Styles
+
+ol.upperalpha {
+  list-style: upper-alpha;
+}
+
+ol.loweralpha {
+  list-style: lower-alpha;
+}
+
+ol.upperroman {
+  list-style: upper-roman;
+}
+
+ol.lowerroman {
+  list-style: lower-roman;
+}
+
+// Alignment
+
+.centered {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.align-right {
+  float: right;
+  clear: right;
+  margin-left: $padding-block;
+}
+
+.align-left {
+  float: left;
+  clear: left;
+  margin-right: $padding-block;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-default {
+  margin-left: 0;
+}

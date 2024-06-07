@@ -1,0 +1,18 @@
+@use "pkg:iati-design-system" as *;
+
+aside.sidebar {
+  @extend .iati-card;
+  float: right;
+  clear: both;
+  width: 250px;
+  overflow: auto;
+  margin-left: $padding-block;
+
+  & .sidebar-title {
+    @extend .iati-card__title;
+  }
+
+  & .sidebar-subtitle {
+    @extend .iati-card__subtitle;
+  }
+}

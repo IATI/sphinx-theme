@@ -1,13 +1,5 @@
 @use "pkg:iati-design-system" as ds;
 
-.centered {
-  text-align: center;
-}
-
-.right {
-  text-align: right;
-}
-
 .rubric {
   font-weight: bold;
   font-size: 1.2em;
@@ -23,9 +15,11 @@
 }
 
 .headerlink {
-  color: ds.$color-grey-40;
+  color: ds.$color-grey-30;
   text-decoration: none;
   padding-left: ds.$padding-block;
+  font-size: 0.8em;
+  font-weight: ds.$font-weight-body;
 
   &:hover {
     color: ds.$color-grey-90;
@@ -35,7 +29,7 @@
 .guilabel {
   background-color: ds.$color-teal-10;
   border: 1px solid ds.$color-teal-70;
-  font-size: 0.9em;
+  font-size: 0.6em;
   padding: 0 0.2em;
   border-radius: 0.2em;
 }
@@ -60,7 +54,20 @@ span.linenos {
   margin-right: ds.$padding-block;
 }
 
-.code-block-caption {
+.highlight {
+  background: none;
+}
+
+// Captions
+
+.code-block-caption,
+.caption-text {
   text-align: center;
   font-style: italic;
+}
+
+// Description Lists
+
+dl dt .classifier::before {
+  content: " : ";
 }

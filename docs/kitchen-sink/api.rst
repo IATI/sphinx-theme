@@ -7,7 +7,7 @@
 API documentation
 *****************
 
-Using Sphinx's :ref:`sphinx.ext.autodoc` plugin, it is possible to auto-generate documentation of a Python module.
+Using Sphinx's :code:`sphinx.ext.autodoc` plugin, it is possible to auto-generate documentation of a Python module.
 
 .. tip::
     Avoid having in-function-signature type annotations with autodoc,

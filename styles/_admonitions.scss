@@ -6,32 +6,23 @@
 .versionchanged,
 div.deprecated {
   @extend .iati-callout;
-}
 
-.admonition-title,
-.topic-title {
-  @extend .iati-callout__title;
-}
+  &.attention {
+    @extend .iati-callout--purple;
+  }
 
-.attention,
-.caution,
-.warning,
-.versionchanged {
-  @extend .iati-callout--orange;
-}
+  &.caution {
+    @extend .iati-callout--orange;
+  }
 
-.danger,
-.error,
-div.deprecated {
-  @extend .iati-callout--red;
-}
+  &.note {
+    @extend .iati-callout--green;
+  }
 
-.versionadded {
-  @extend .iati-callout--green;
-}
-
-.tip {
-  @extend .iati-callout--purple;
+  .admonition-title,
+  .topic-title {
+    @extend .iati-callout__title;
+  }
 }
 
 .versionmodified {

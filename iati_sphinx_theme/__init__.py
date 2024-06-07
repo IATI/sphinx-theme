@@ -7,3 +7,4 @@ import sphinx.application
 
 def setup(app: sphinx.application.Sphinx) -> None:
     app.add_html_theme("iati_sphinx_theme", path.abspath(path.dirname(__file__)))
+    app.config["html_permalinks_icon"] = "#"

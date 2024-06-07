@@ -18,10 +18,17 @@ Enumerated Lists
    a. nested lists are numbered separately
    b. nested lists need a blank line before and after
 
+      A. Upper Alpha
+
 5. Roman numerals can also be used
 
    i. nested lists are numbered separately
    ii. nested lists need a blank line before and after
+
+6. Upper Roman
+
+   I. first item
+   II. second item
 
 #. Can have automatic number with the ``#`` character.
 

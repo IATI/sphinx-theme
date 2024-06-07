@@ -1,0 +1,27 @@
+@use "pkg:iati-design-system" as *;
+
+.globaltoc {
+  @extend .iati-card;
+  margin: $padding-block;
+
+  @media (min-width: $screen-lg) {
+    flex: 0 0 250px;
+    align-self: flex-start;
+  }
+
+  & .caption {
+    @extend .iati-card__subtitle;
+
+    .caption-text {
+      font-style: normal;
+    }
+
+    &:not(:first-of-type) {
+      margin-top: $padding-block;
+    }
+  }
+
+  ul {
+    @extend .iati-card__menu;
+  }
+}
