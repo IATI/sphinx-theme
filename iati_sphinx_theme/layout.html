@@ -1,5 +1,11 @@
 {% extends "basic/layout.html" %}
 
+{%- block extrahead %}
+  {% if theme_plausible_domain %}
+    <script defer data-domain="{{ theme_plausible_domain }}" src="https://plausible.io/js/script.js"></script>
+  {% endif %}
+{% endblock %}
+
 {%- block header %}
   <div class="iati-title-bar">
     <header class="iati-header">
