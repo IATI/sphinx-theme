@@ -1,6 +1,6 @@
 # IATI Sphinx Theme
 
-Test
+Test2
 
 ## How do I use IATI Sphinx Theme?
 
