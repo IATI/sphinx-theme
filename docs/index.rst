@@ -18,6 +18,8 @@ IATI Sphinx Theme
 Installation
 ============
 
+Test
+
 1.
   Install the theme in your Sphinx project.
 

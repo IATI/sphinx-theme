@@ -1,7 +1,5 @@
 # IATI Sphinx Theme
 
-Test2
-
 ## How do I use IATI Sphinx Theme?
 
 Please see the [IATI Sphinx Theme Documentation](https://iati-sphinx-theme.readthedocs.io/en/latest/) for usage instructions.
