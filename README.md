@@ -22,10 +22,10 @@ pip install -r requirements_dev.txt
 ### Run linting
 
 ```
-black iati_sphinx_theme/
-isort iati_sphinx_theme/
-flake8 iati_sphinx_theme/
-mypy iati_sphinx_theme/
+black iati_sphinx_theme/ docs/
+isort iati_sphinx_theme/ docs/
+flake8 iati_sphinx_theme/ docs/
+mypy iati_sphinx_theme/ docs/
 ```
 
 ### Documentation with live preview
