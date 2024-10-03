@@ -2,7 +2,7 @@
 
 ## How do I use IATI Sphinx Theme?
 
-Please see the [IATI Sphinx Theme Documentation](https://iati-sphinx-theme.readthedocs.io/en/latest/) for usage instructions.
+Please see the [IATI Sphinx Theme Documentation](https://iati-sphinx-theme.readthedocs-hosted.com/en/latest/) for usage instructions.
 
 ## How do I contribute to IATI Sphinx Theme?
 
