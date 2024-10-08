@@ -1,7 +1,7 @@
 <div class="relations">
   {%- if prev %}
     <div>
-      <p class="relations__label">Previous</p>
+      <p class="relations__label">{{ _("Previous") }}</p>
       <a href="{{ prev.link|e }}">
         {{ prev.title }}
       </a>
@@ -9,7 +9,7 @@
   {%- endif %}
   {%- if next %}
     <div class="right">
-      <p class="relations__label">Next</p>
+      <p class="relations__label">{{ _("Next") }}</p>
       <a href="{{ next.link|e }}">
         {{ next.title }}
       </a>

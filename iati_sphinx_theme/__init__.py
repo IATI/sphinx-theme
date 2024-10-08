@@ -11,3 +11,5 @@ def setup(app: sphinx.application.Sphinx) -> None:
     app.config["html_favicon"] = "static/favicon-16x16.png"
     app.config["html_context"]["language"] = app.config["language"]
     app.add_js_file("language-switcher.js")
+    locale_path = path.join(path.abspath(path.dirname(__file__)), "locale")
+    app.add_message_catalog("sphinx", locale_path)
