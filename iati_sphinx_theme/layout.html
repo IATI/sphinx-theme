@@ -19,12 +19,12 @@
       </div>
       <ul class="iati-header__nav">
         <li class="iati-header__nav-item">
-          <a href="{{ pathto('search') }}">Search</a>
+          <a href="{{ pathto('search') }}">{{_("Search")}}</a>
         </li>
       </ul>
     </header>
     <div class="iati-title-bar__title">
-      {{ _(project) }}
+      {{ theme_header_title_text }}
     </div>
   </div>
 {% endblock %}
@@ -58,18 +58,18 @@
         />
       </a>
       <div class="iati-footer__list">
-          <span class="iati-footer__list-title">Useful Links</span>
+          <span class="iati-footer__list-title">{{_("Useful Links")}}</span>
           <ul>
-            <li><a href="https://iatistandard.org/en/contact/">Contact</a></li>
-            <li><a href="https://iatistandard.org/en/privacy-policy/">Privacy Policy</a></li>
+            <li><a href="https://iatistandard.org/en/contact/">{{_("Contact")}}</a></li>
+            <li><a href="https://iatistandard.org/en/privacy-policy/">{{_("Privacy Policy")}}</a></li>
           </ul>
         </div>
     </div>
     <hr />
     <div>
       <div>
-        {{- copyright_block() -}}
-        Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> {{ sphinx_version }}.
+        {{ _("Copyright 2024 IATI Secretariat.") }}
+        {{ _("Created using") }} <a href="https://www.sphinx-doc.org/">Sphinx</a> {{ sphinx_version }}.
       </div>
       <div class="iati-footer__social-icons">
         <a href="https://twitter.com/IATI_aid" aria-label="Twitter">
