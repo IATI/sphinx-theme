@@ -36,6 +36,7 @@ This theme has multiple options, which can be configured using the :code:`html_t
 
   html_theme_options = {
     "github_repository": "https://github.com/organisation/repository",
+    "header_title_text": "Title",
     "plausible_domain": "example.com",
     "tool_name": "IATI Tool",
     "tool_url": "https://tool.iatistandard.org/",
@@ -47,6 +48,11 @@ There is more information on each option below.
 -------------------------
 
 This should be a link to the Github repository for the documentation site, and is used to link to the source code in the footer of the site.
+
+:code:`header_title_text`
+-------------------------
+
+The site's title to display in the header and navigation.
 
 :code:`plausible_domain`
 ------------------------

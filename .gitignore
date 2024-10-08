@@ -5,3 +5,7 @@ dist
 
 # Node
 node_modules
+
+# Translations
+.doctrees
+*.mo

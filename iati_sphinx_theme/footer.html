@@ -4,13 +4,13 @@
     <div class="iati-footer__section iati-footer__section--first">
       <div class="iati-footer__container">
         <div class="iati-footer-block">
-          <h2 class="iati-footer-block__title">Additional Information</h2>
+          <h2 class="iati-footer-block__title">{{ _("Additional Information") }}</h2>
           <div class="iati-footer-block__content">
-            <p>Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> {{ sphinx_version }}.</p>
+            <p>{% trans url="https://www.sphinx-doc.org/" %}Created using <a href="{{ url }}">Sphinx</a> {{ sphinx_version }}.{% endtrans %}</p>
             {% if theme_github_repository %}
-              <p>Source code on <a href="{{ theme_github_repository }}">GitHub</a>.</p>
+              <p>{% trans url=theme_github_repository %}Source code at <a href="{{ url }}">GitHub</a>.{% endtrans %}</p>
             {% endif %}
-            <p>Documentation licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
+            <p>{% trans url="https://creativecommons.org/licenses/by/4.0/" %}Documentation licensed under <a href="{{ url }}">CC BY 4.0</a>.{% endtrans %}</p>
           </div>
         </div>
       </div>
@@ -20,10 +20,10 @@
       <div class="iati-footer__container">
         <nav>
           <ul class="iati-piped-list iati-footer__legal-nav">
-            <li><a href="https://iatistandard.org/en/privacy-policy/">Privacy Policy</a></li>
+            <li><a href="https://iatistandard.org/en/privacy-policy/">{{ _("Privacy Policy") }}</a></li>
             <li>
               <span>
-                {{ copyright_block() }}
+                {{ _("© Copyright 2024 United Nations Development Programme, on behalf of the IATI Secretariat") }}
               </span>
             </li>
           </ul>
