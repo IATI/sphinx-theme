@@ -11,7 +11,9 @@ anyio==4.3.0
     #   starlette
     #   watchfiles
 babel==2.14.0
-    # via sphinx
+    # via
+    #   sphinx
+    #   sphinx-intl
 black==24.4.0
     # via iati-sphinx-theme (pyproject.toml)
 certifi==2024.8.30
@@ -21,6 +23,7 @@ charset-normalizer==3.3.2
 click==8.1.7
     # via
     #   black
+    #   sphinx-intl
     #   uvicorn
 colorama==0.4.6
     # via sphinx-autobuild
@@ -77,8 +80,12 @@ sniffio==1.3.1
 snowballstemmer==2.2.0
     # via sphinx
 sphinx==7.3.5
-    # via sphinx-autobuild
+    # via
+    #   sphinx-autobuild
+    #   sphinx-intl
 sphinx-autobuild==2024.4.16
+    # via iati-sphinx-theme (pyproject.toml)
+sphinx-intl==2.2.0
     # via iati-sphinx-theme (pyproject.toml)
 sphinxcontrib-applehelp==1.0.8
     # via sphinx
@@ -116,3 +123,6 @@ watchfiles==0.21.0
     # via sphinx-autobuild
 websockets==12.0
     # via sphinx-autobuild
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools

@@ -17,7 +17,8 @@ dev = [
     "Flake8-pyproject",
     "mypy",
     "sphinx-autobuild",
-    "types-docutils"
+    "sphinx-intl",
+    "types-docutils",
 ]
 
 [project.entry-points."sphinx.html_themes"]
