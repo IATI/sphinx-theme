@@ -73,3 +73,39 @@ To run a local version of the theme with another project, e.g. `my-docs`, take t
    pip install sphinx-autobuild
    sphinx-autobuild docs docs/_build/html
    ```
+
+### Translation
+
+There are three parts to translation in this repository:
+
+1. Translating the theme's built-in strings from the HTML templates in the `iati_sphinx_theme` directory. The message catalog name is `iati-sphinx-theme.[pot|po|mo]` and is found in the `iati_sphinx_theme/locale` directory. These are bundled with the published theme in order for consumers to have access to the translations.
+2. Translating the user-configurable strings for the theme, found in `docs/conf.py` file in the `html_theme_options` object. The message catalog name is `iati-sphinx-theme.[pot|po|mo]` and is located in the `docs/locale` directory. These must be translated by the consumer of the theme, as they are variable. Because this theme is used for its own documentation, we do this step in this repository too.
+3. Translating the documentation in the `.rst` files found in the `docs` directory. There is a message catalog for each file. For example, for `index.rst` there is an `index.[pot|po|mo]`.
+
+Each of these has a slightly different method of extracting text, so a `Makefile` exists to make running the commands easier.
+
+1. Extract text into `.pot` files
+
+   ```
+   make extract
+   ```
+
+2. Update existing `.po` files based on `.pot` files
+
+   ```
+   make update
+   ```
+
+3. Optionally, initialise a `.po` file for a new language
+
+   ```
+   make init lang=es
+   ```
+
+4. Add translations to the `.po` files
+
+5. Compile to `.mo` files (only applies to the theme's built-in strings, so that they can be bundled with the theme)
+
+   ```
+   make compile
+   ```
