@@ -38,10 +38,10 @@ Configuration
 Plausible Analytics
 -------------------
 
-To integrate with Plausible Analytics, add the :code:`plausible_domain` option in your project's :code:`conf.py` file.
+To integrate with Plausible Analytics, add the :code:`plausible_domain` option to the :code:`html_theme_options` object in your project's :code:`conf.py`.
 
-If your docs site is a subdomain for the site it is documenting, use the top level domain for cross-subdomain tracking.
-For example, for the Sphinx site :code:`docs.example.com`, use :code:`example.com` as your :code:`plausible_domain`.
+If your documentation site is a subdomain and you want cross-subdomain tracking, use the top level domain.
+For example, for the documentation site :code:`docs.example.com`, use :code:`example.com` as your :code:`plausible_domain`.
 
 .. code-block:: python
 
