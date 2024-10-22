@@ -1,0 +1,108 @@
+{# TODO: What links do we want here for docs sites? #}
+{% set tool_nav_items = [
+  {"text": "Tool Home", "link": "/"},
+] %}
+
+{% set general_nav_items = [
+  {"text": "IATI Home", "link": "https://iatistandard.org/"},
+  {"text": "News", "link": "https://iatistandard.org/news/"},
+  {"text": "Events", "link": "https://iatistandard.org/events/"},
+  {"text": "Contact", "link": "https://iatistandard.org/guidance/get-support/"},
+] %}
+
+<div class="iati-mobile-nav js-iati-mobile-nav">
+  <div class="iati-mobile-nav__overlay js-iati-mobile-overlay"></div>
+    <nav class="iati-mobile-nav__menu">
+      <div class="iati-mobile-nav__header">
+        <h2 class="iati-mobile-nav__label">Menu</h2>
+        <button class="iati-menu-toggle iati-menu-toggle--close js-iati-menu-toggle-close">
+          <span>Close</span>
+        </button>
+      </div>
+      <ul>
+        {% for nav_item in tool_nav_items %}
+          <li class="iati-mobile-nav__item">
+            <a href="{{ nav_item['link'] }}" class="iati-mobile-nav__link">{{ nav_item["text"] }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+      <ul>
+        {% for nav_item in general_nav_items %}
+          <li class="iati-mobile-nav__item">
+            <a href="{{ nav_item['link'] }}" class="iati-mobile-nav__link">{{ nav_item["text"] }}</a>
+          </li>
+        {% endfor %}
+        {# TODO: Include "Help Docs" for docs sites or not? #}
+        <li class="iati-mobile-nav__item">
+          <a href="#" class="iati-mobile-nav__link">Help Docs</a>
+        </li>
+      </ul>
+    </nav>
+</div>
+
+<header class="iati-header">
+
+  <div class="iati-header__section iati-header__section--first">
+    <div class="iati-header__container">
+      <a href="https://iatistandard.org/" aria-label="Go to IATI homepage">
+        <img class="iati-header__logo" alt="" src="{{ pathto('_static/logo-colour.svg', 1) }}">
+      </a>
+      <nav class="iati-header__general-nav">
+        <ul class="iati-piped-list">
+          {% for nav_item in general_nav_items %}
+            <li>
+              <a href="{{ nav_item['link'] }}">{{ nav_item["text"] }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <div class="iati-header__section iati-header__section--last iati-brand-background">
+    <div class="iati-header__container iati-brand-background__content">
+
+      <div class="iati-header__actions">
+
+        <div class="iati-country-switcher">
+          <label for="iati-country-switcher" class="iati-country-switcher__label">Choose your language</label>
+          <select id="iati-country-switcher" class="iati-country-switcher__control">
+            <option>English</option>
+          </select>
+        </div>
+
+        <a href="#" class="iati-button iati-button--light hide display--sm">
+          <span>Help docs</span>
+          <img class="iati-button__icon" alt="" src="{{ pathto('_static/icon-info.svg', 1) }}">
+        </a>
+
+        <a href="{{ pathto('search') }}" class="iati-button iati-button--light">
+          <span>Search</span>
+          <img class="iati-button__icon" alt="" src="{{ pathto('_static/icon-search.svg', 1) }}">
+        </a>
+
+        <button class="iati-menu-toggle iati-menu-toggle--open js-iati-menu-toggle-open">
+          <span class="iati-menu-toggle__label">Menu</span>
+        </button>
+      </div>
+
+      <div class="iati-header-title">
+        <p class="iati-header-title__eyebrow">IATI Tools</p>
+        <p class="iati-header-title__heading">{{ _(project) }}</p>
+      </div>
+
+      <div class="iati-header__nav">
+        <nav>
+          <ul class="iati-tool-nav">
+            {% for nav_item in tool_nav_items %}
+              <li>
+                <a href="{{ nav_item['link'] }}"  class="iati-tool-nav-link">{{ nav_item["text"] }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+</header>

@@ -1,0 +1,90 @@
+<footer class="iati-footer iati-brand-background">
+
+  {# TODO: Brand background #}
+  <div class="iati-brand-background__content">
+
+    <div class="iati-footer__section iati-footer__section--first">
+      <div class="iati-footer__container">
+
+        <div class="iati-footer-block">
+          <h2 class="iati-footer-block__title">Useful links</h2>
+          <div class="iati-footer-block__content">
+          {# TODO: Any links to include here? #}
+            <ul>
+              <li><a href="#">Useful link</a></li>
+              <li><a href="#">Translation FAQs</a></li>
+              <li><a href="#">Another useful link</a></li>
+              <li><a href="#">Another even more useful longer link</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="iati-footer__section">
+      <div class="iati-footer__container">
+        <div class="iati-footer-block">
+          <h2 class="iati-footer-block__title">Additional information</h2>
+          <div class="iati-footer-block__content iati-footer-block__content--columns">
+            <p>Part of the IATI Unified Platform Code licensed under the GNU AGPL.</p>
+            <p>Documentation licensed under CC by 3.0</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.</p>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+            <p>Web v2.8.2</p>
+            <p>Services v2.8.0</p>
+            <p>API v2.4.0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="iati-footer__section iati-footer__section--last">
+      <div class="iati-footer__container">
+        <nav>
+          <ul class="iati-piped-list iati-footer__legal-nav">
+            {# TODO: "Privacy" or "Privacy Policy"? #}
+            <li><a href="https://iatistandard.org/en/privacy-policy/">Privacy Policy</a></li>
+            {# TODO: Should "Data removal" be in this list? Where should it link to? #}
+            {# <li><a href="#">Data removal</a></li> #}
+            <li>
+              <span>
+                {# TODO: What should the copyright block say? #}
+                {# © Copyright IATI 2024. All rights reserved #}
+                {{ copyright_block() }}
+                Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> {{ sphinx_version }}.
+              </span>
+            </li>
+          </ul>
+        </nav>
+
+        {# TODO: Include country switcher now? #}
+        <div class="iati-country-switcher">
+          <label for="iati-country-switcher" class="iati-country-switcher__label">Choose your language</label>
+          <select id="iati-country-switcher" class="iati-country-switcher__control">
+            <option>English</option>
+          </select>
+        </div>
+
+        <div class="iati-footer__social">
+          <a
+            href="https://www.linkedin.com/company/international-aid-transparency-initiative/"
+            aria-label="LinkedIn"
+          >
+            <i class="iati-icon iati-icon--linkedin"></i>
+          </a>
+          <a href="https://twitter.com/IATI_aid" aria-label="Twitter">
+            <i class="iati-icon iati-icon--twitter"></i>
+          </a>
+          <a
+            href="https://www.youtube.com/channel/UCAVH1gcgJXElsj8ENC-bDQQ"
+            aria-label="YouTube"
+          >
+            <i class="iati-icon iati-icon--youtube"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</footer>
