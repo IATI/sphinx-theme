@@ -9,6 +9,7 @@
 project = "IATI Sphinx Theme"
 copyright = "2024 IATI Secretariat"
 author = "IATI Secretariat"
+language = "en"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -26,6 +27,11 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = "iati_sphinx_theme"
-html_theme_options = {"github_repository": "https://github.com/IATI/sphinx-theme"}
+html_theme_options = {
+    "github_repository": "https://github.com/IATI/sphinx-theme",
+    "languages": {
+        "en": "English",
+    },
+}
 
 todo_include_todos = True

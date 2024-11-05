@@ -28,12 +28,9 @@
             </li>
           </ul>
         </nav>
-        <div class="iati-country-switcher">
-          <label for="iati-country-switcher" class="iati-country-switcher__label">Choose your language</label>
-          <select id="iati-country-switcher" class="iati-country-switcher__control">
-            <option>English</option>
-          </select>
-        </div>
+
+        {%- include "language-switcher.html" %}
+
         <div class="iati-footer__social">
           <a
             href="https://www.linkedin.com/company/international-aid-transparency-initiative/"
