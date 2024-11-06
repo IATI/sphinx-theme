@@ -49,6 +49,15 @@
 
 // Code Blocks
 
+code {
+  @extend .iati-code;
+}
+
+pre {
+  @extend .iati-code;
+  @extend .iati-code--block;
+}
+
 span.linenos {
   color: ds.$color-grey-50;
   margin-right: ds.$padding-block;
@@ -70,4 +79,10 @@ span.linenos {
 
 dl dt .classifier::before {
   content: " : ";
+}
+
+// Block quotes
+
+blockquote:not(:has(pre)) {
+  @extend .iati-quote;
 }

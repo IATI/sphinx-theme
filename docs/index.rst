@@ -3,11 +3,6 @@ IATI Sphinx Theme
 =================
 
 .. toctree::
-   :hidden:
-
-   Home <self>
-
-.. toctree::
    :titlesonly:
    :maxdepth: 1
    :caption: Development
@@ -35,8 +30,24 @@ Installation
 Configuration
 =============
 
-Plausible Analytics
+This theme has multiple options, which can be configured using the :code:`html_theme_options` object in your :code:`conf.py` file.
+
+.. code-block:: python
+
+  html_theme_options = {
+    "github_repository": "https://github.com/organisation/repository",
+    "plausible_domain": "example.com"
+  }
+
+There is more information on each option below.
+
+:code:`github_repository`
 -------------------
+
+This should be a link to the Github repository for the documentation site, and is used to link to the source code in the footer of the site.
+
+:code:`plausible_domain`
+------------------------
 
 To integrate with Plausible Analytics, add the :code:`plausible_domain` option in your project's :code:`conf.py` file.
 
