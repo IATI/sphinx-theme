@@ -87,6 +87,8 @@ Strings built into the theme will be translated automatically into supported lan
 The following languages are currently supported:
 
 - English (:code:`en`)
+- French  (:code:`fr`)
+- Spanish  (:code:`es`)
 
 User-defined strings must be translated by the user of the theme.
 These are configured in your :code:`conf.py` file under :code:`html_theme_options`.
