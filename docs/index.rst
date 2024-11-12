@@ -37,6 +37,9 @@ This theme has multiple options, which can be configured using the :code:`html_t
   html_theme_options = {
     "github_repository": "https://github.com/organisation/repository",
     "header_title_text": "Title",
+    "languages": {
+      "en": "English",
+    },
     "plausible_domain": "example.com",
     "tool_name": "IATI Tool",
     "tool_url": "https://tool.iatistandard.org/",
@@ -53,6 +56,13 @@ This should be a link to the Github repository for the documentation site, and i
 -------------------------
 
 The site's title to display in the header and navigation.
+
+:code:`languages`
+-----------------
+
+A dictionary of languages which the documentation is available in, used to populate the language switcher component.
+
+For each entry, the keys (:code:`en`) is used to send the user to the correct site, and the value (:code:`English`) is displayed in the language switcher.
 
 :code:`plausible_domain`
 ------------------------
