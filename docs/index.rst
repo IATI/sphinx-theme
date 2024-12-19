@@ -36,7 +36,9 @@ This theme has multiple options, which can be configured using the :code:`html_t
 
   html_theme_options = {
     "github_repository": "https://github.com/organisation/repository",
-    "plausible_domain": "example.com"
+    "plausible_domain": "example.com",
+    "tool_name": "IATI Tool",
+    "tool_url": "https://tool.iatistandard.org/",
   }
 
 There is more information on each option below.
@@ -59,3 +61,13 @@ For example, for the Sphinx site :code:`docs.example.com`, use :code:`example.co
   html_theme_options = {
     "plausible_domain": "example.com"
   }
+
+:code:`tool_name`
+-----------------
+
+The name of the tool which your Sphinx site documents.
+
+:code:`tool_url`
+----------------
+
+The URL of the tool which your Sphinx site documents.

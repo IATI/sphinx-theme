@@ -5,6 +5,13 @@
   {"text": "Contact", "link": "https://iatistandard.org/guidance/get-support/"},
 ] %}
 
+{% set tool_nav_items = [
+  {"text": theme_tool_name, "link": theme_tool_url},
+  {"text": project, "link": pathto('', 1)},
+] if theme_tool_name else [
+  {"text": project, "link": pathto('', 1)},
+]%}
+
 <div class="iati-mobile-nav js-iati-mobile-nav">
   <div class="iati-mobile-nav__overlay js-iati-mobile-overlay"></div>
     <nav class="iati-mobile-nav__menu">
@@ -15,9 +22,11 @@
         </button>
       </div>
       <ul>
+        {% for nav_item in tool_nav_items %}
           <li class="iati-mobile-nav__item">
-            <a href="{{ pathto('', 1) }}"  class="iati-mobile-nav__link">{{ _(project) }}</a>
+            <a href="{{ nav_item['link'] }}" class="iati-mobile-nav__link">{{ nav_item["text"] }}</a>
           </li>
+        {% endfor %}
       </ul>
       <ul>
         {% for nav_item in general_nav_items %}
@@ -73,9 +82,11 @@
       <div class="iati-header__nav">
         <nav>
           <ul class="iati-tool-nav">
+            {% for nav_item in tool_nav_items %}
               <li>
-                <a href="{{ pathto('', 1) }}"  class="iati-tool-nav-link">{{ _(project) }}</a>
+                <a href="{{ nav_item['link'] }}" class="iati-tool-nav-link">{{ nav_item["text"] }}</a>
               </li>
+            {% endfor %}
           </ul>
         </nav>
       </div>
