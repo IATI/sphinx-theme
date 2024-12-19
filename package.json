@@ -8,7 +8,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
-    "iati-design-system": "^2.1.3",
+    "iati-design-system": "^3.4.0",
     "sass": "^1.75.0",
     "semantic-release": "^23.1.1",
     "semantic-release-pypi": "^3.0.2",
