@@ -42,7 +42,7 @@ This theme has multiple options, which can be configured using the :code:`html_t
 There is more information on each option below.
 
 :code:`github_repository`
--------------------
+-------------------------
 
 This should be a link to the Github repository for the documentation site, and is used to link to the source code in the footer of the site.
 
