@@ -32,6 +32,9 @@ html_theme_options = {
     "languages": {
         "en": "English",
     },
+    # Uncomment below lines to display tool navigation
+    # "tool_name": "IATI Example Tool",
+    # "tool_url": "https://example.com/",
 }
 
 todo_include_todos = True
