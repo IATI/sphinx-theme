@@ -1,16 +1,18 @@
 {
   "name": "sphinx-theme",
+  "type": "module",
   "scripts": {
-    "build": "sass --pkg-importer=node --style=expanded --no-source-map styles/main.scss:iati_sphinx_theme/static/iati.css",
+    "build": "vite build",
     "build:watch": "npm run build -- --watch"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
-    "iati-design-system": "^2.1.3",
+    "iati-design-system": "^3.4.0",
     "sass": "^1.75.0",
     "semantic-release": "^23.1.1",
-    "semantic-release-pypi": "^3.0.2"
+    "semantic-release-pypi": "^3.0.2",
+    "vite": "^5.4.11"
   },
   "release": {
     "plugins": [
