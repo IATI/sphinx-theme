@@ -39,6 +39,8 @@ This theme has multiple options, which can be configured using the :code:`html_t
     "header_title_text": "Title",
     "languages": {
       "en": "English",
+      "fr": "Français",
+      "es": "Español",
     },
     "plausible_domain": "example.com",
     "tool_name": "IATI Tool",

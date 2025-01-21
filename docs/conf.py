@@ -30,8 +30,8 @@ html_theme_options = {
     "header_title_text": "IATI Sphinx Theme",
     "languages": {
         "en": "English",
-        "fr": "French",
-        "es": "Spanish",
+        "fr": "Français",
+        "es": "Español",
     },
     # Uncomment below lines to display tool navigation
     # "tool_name": "IATI Example Tool",
