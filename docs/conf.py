@@ -7,7 +7,6 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "IATI Sphinx Theme"
-copyright = "2024 IATI Secretariat"
 author = "IATI Secretariat"
 language = "en"
 
@@ -22,15 +21,17 @@ extensions = [
 templates_path = ["_templates"]
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
-
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = "iati_sphinx_theme"
 html_theme_options = {
     "github_repository": "https://github.com/IATI/sphinx-theme",
+    "header_title_text": "IATI Sphinx Theme",
     "languages": {
         "en": "English",
+        "fr": "Français",
+        "es": "Español",
     },
     # Uncomment below lines to display tool navigation
     # "tool_name": "IATI Example Tool",
@@ -38,3 +39,7 @@ html_theme_options = {
 }
 
 todo_include_todos = True
+
+# -- Options for Texinfo output -------------------------------------------
+
+locale_dirs = ["locale/", "../iati_sphinx_theme/locale"]
