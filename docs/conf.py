@@ -30,6 +30,8 @@ html_theme_options = {
     "header_title_text": "IATI Sphinx Theme",
     "languages": {
         "en": "English",
+        "fr": "French",
+        "es": "Spanish",
     },
     # Uncomment below lines to display tool navigation
     # "tool_name": "IATI Example Tool",
@@ -37,3 +39,7 @@ html_theme_options = {
 }
 
 todo_include_todos = True
+
+# -- Options for Texinfo output -------------------------------------------
+
+locale_dirs = ["locale/", "../iati_sphinx_theme/locale"]

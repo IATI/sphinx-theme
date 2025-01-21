@@ -12,6 +12,8 @@ build:
     pre_install:
       - npm ci
       - npm run build
+    pre_build:
+      - make compile
 
 sphinx:
   configuration: docs/conf.py
