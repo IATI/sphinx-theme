@@ -1,14 +1,14 @@
 # Translations template for PROJECT.
-# Copyright (C) 2024 ORGANIZATION
+# Copyright (C) 2025 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-19 10:48+0200\n"
+"POT-Creation-Date: 2025-01-21 10:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,19 +63,19 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
-#: iati_sphinx_theme/header.html:12 iati_sphinx_theme/header.html:64
+#: iati_sphinx_theme/header.html:19 iati_sphinx_theme/header.html:73
 msgid "Menu"
 msgstr ""
 
-#: iati_sphinx_theme/header.html:14
+#: iati_sphinx_theme/header.html:21
 msgid "Close"
 msgstr ""
 
-#: iati_sphinx_theme/header.html:59 iati_sphinx_theme/search.html:15
+#: iati_sphinx_theme/header.html:68 iati_sphinx_theme/search.html:15
 msgid "Search"
 msgstr ""
 
-#: iati_sphinx_theme/header.html:69
+#: iati_sphinx_theme/header.html:78
 msgid "IATI Tools"
 msgstr ""
 
