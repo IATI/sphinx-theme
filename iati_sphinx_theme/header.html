@@ -6,10 +6,10 @@
 ] %}
 
 {% set tool_nav_items = [
-  {"text": _(theme_tool_name), "link": theme_tool_url},
-  {"text": _(theme_header_title_text), "link": pathto('', 1)},
+  {"text": theme_tool_name, "link": theme_tool_url},
+  {"text": theme_header_title_text, "link": pathto('', 1)},
 ] if theme_tool_name else [
-  {"text": _(theme_header_title_text), "link": pathto('', 1)},
+  {"text": theme_header_title_text, "link": pathto('', 1)},
 ]%}
 
 <div class="iati-mobile-nav js-iati-mobile-nav">
@@ -76,7 +76,7 @@
 
       <div class="iati-header-title">
         <p class="iati-header-title__eyebrow">{{ _("IATI Tools") }}</p>
-        <p class="iati-header-title__heading">{{ _(theme_header_title_text) }}</p>
+        <p class="iati-header-title__heading">{{ theme_header_title_text }}</p>
       </div>
 
       <div class="iati-header__nav">
