@@ -93,14 +93,29 @@ The URL of the tool which your Sphinx site documents.
 Translation
 ===========
 
-The IATI Sphinx Theme is translatable.
-
-Strings built into the theme will be translated automatically into supported languages.
-The following languages are currently supported:
+The IATI Sphinx Theme is translatable. The following languages are currently supported:
 
 - English (:code:`en`)
 - French  (:code:`fr`)
 - Spanish  (:code:`es`)
+
+Built-in strings
+----------------
+
+To enable translation of built-in strings, you must add the theme to the :code:`locale_dirs` list in your :code:`conf.py`.
+
+.. code-block:: python
+
+  import os
+  import iati_sphinx_theme
+
+  local_dirs = [
+    "locale",
+    os.path.join(os.path.dirname(iati_sphinx_theme.__file__), "locale")
+  ]
+
+User-defined strings
+--------------------
 
 User-defined strings must be translated by the user of the theme.
 These are configured in your :code:`conf.py` file under :code:`html_theme_options`.
@@ -118,6 +133,7 @@ In order to translate these, complete the following steps in the same location a
 
   html_theme_options = {
       "header_title_text": _("Title"),
+      "tool_name": _("IATI Example Tool"),
   }
 
   def setup(app):
@@ -140,4 +156,12 @@ In order to translate these, complete the following steps in the same location a
   # To update an existing language
   pybabel update -i locale/iati-sphinx-theme.pot -d locale --domain=iati-sphinx-theme -l es
 
-4. Continue with your project's usual translation workflow.
+4. Compile the :code:`.mo` files.
+   This must be done before Sphinx builds the project, for example using `Read the Docs' pre_build job <https://docs.readthedocs.io/en/stable/config-file/v2.html#build-jobs>`_,
+   or by compiling and committing the files to version control.
+
+.. code-block::
+
+  pybabel compile -d locale --domain=iati-sphinx-theme
+
+5. Continue with your project's usual translation workflow.

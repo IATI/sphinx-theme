@@ -3,6 +3,16 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+import os
+
+import sphinx.application
+from sphinx.locale import get_translation
+
+import iati_sphinx_theme
+
+MESSAGE_CATALOG_NAME = "iati-sphinx-theme"
+_ = get_translation(MESSAGE_CATALOG_NAME)
+
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
@@ -27,19 +37,27 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 html_theme = "iati_sphinx_theme"
 html_theme_options = {
     "github_repository": "https://github.com/IATI/sphinx-theme",
-    "header_title_text": "IATI Sphinx Theme",
+    "header_title_text": _("IATI Sphinx Theme"),
     "languages": {
         "en": "English",
         "fr": "Français",
         "es": "Español",
     },
     # Uncomment below lines to display tool navigation
-    # "tool_name": "IATI Example Tool",
-    # "tool_url": "https://example.com/",
+    "tool_name": _("IATI Example Tool"),
+    "tool_url": "https://example.com/",
 }
 
 todo_include_todos = True
 
 # -- Options for Texinfo output -------------------------------------------
 
-locale_dirs = ["locale/", "../iati_sphinx_theme/locale"]
+locale_dirs = [
+    "locale",
+    os.path.join(os.path.dirname(iati_sphinx_theme.__file__), "locale"),
+]
+
+
+def setup(app: sphinx.application.Sphinx) -> None:
+    locale_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "locale")
+    app.add_message_catalog(MESSAGE_CATALOG_NAME, locale_path)
