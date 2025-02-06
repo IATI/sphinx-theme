@@ -80,7 +80,7 @@ msgstr "Buscar"
 
 #: iati_sphinx_theme/header.html:78
 msgid "IATI Tools: Documentation"
-msgstr "Herramientas de la IATI: Documentación"
+msgstr "Herramientas de IATI: Documentación"
 
 #: iati_sphinx_theme/language-switcher.html:2
 msgid "Choose your language"
@@ -95,5 +95,5 @@ msgid "Next"
 msgstr "Siguiente"
 
 #~ msgid "IATI Tools"
-#~ msgstr "Herramientas de la IATI"
+#~ msgstr "Herramientas de IATI"
 
