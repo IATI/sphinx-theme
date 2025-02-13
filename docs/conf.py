@@ -43,9 +43,8 @@ html_theme_options = {
         "fr": "Français",
         "es": "Español",
     },
-    # Uncomment below lines to display tool navigation
-    "tool_name": _("IATI Example Tool"),
-    "tool_url": "https://example.com/",
+    "tool_name": _("IATI Sphinx Theme"),
+    "tool_url": "https://github.com/IATI/sphinx-theme",
 }
 
 todo_include_todos = True

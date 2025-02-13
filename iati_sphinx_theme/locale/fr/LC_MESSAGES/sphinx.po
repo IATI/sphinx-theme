@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-29 14:38+0200\n"
+"POT-Creation-Date: 2025-02-13 10:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -65,6 +65,11 @@ msgstr "Publier les données"
 #: iati_sphinx_theme/header.html:5
 msgid "Contact"
 msgstr "Contact"
+
+#: iati_sphinx_theme/header.html:10 iati_sphinx_theme/header.html:12
+#: iati_sphinx_theme/page.html:8 iati_sphinx_theme/page.html:18
+msgid "Documentation"
+msgstr "Documentation"
 
 #: iati_sphinx_theme/header.html:19 iati_sphinx_theme/header.html:73
 msgid "Menu"

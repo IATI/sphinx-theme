@@ -7,9 +7,9 @@
 
 {% set tool_nav_items = [
   {"text": theme_tool_name, "link": theme_tool_url},
-  {"text": theme_header_title_text, "link": pathto('', 1)},
+  {"text": theme_header_title_text + ": " + _("Documentation"), "link": pathto('', 1)},
 ] if theme_tool_name else [
-  {"text": theme_header_title_text, "link": pathto('', 1)},
+  {"text": theme_header_title_text + ": " + _("Documentation"), "link": pathto('', 1)},
 ]%}
 
 <div class="iati-mobile-nav js-iati-mobile-nav">
