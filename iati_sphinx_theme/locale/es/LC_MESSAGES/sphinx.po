@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-21 10:15+0200\n"
+"POT-Creation-Date: 2025-01-29 14:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -79,8 +79,8 @@ msgid "Search"
 msgstr "Buscar"
 
 #: iati_sphinx_theme/header.html:78
-msgid "IATI Tools"
-msgstr "Herramientas de la IATI"
+msgid "IATI Tools: Documentation"
+msgstr "Herramientas de IATI: Documentación"
 
 #: iati_sphinx_theme/language-switcher.html:2
 msgid "Choose your language"
@@ -93,4 +93,7 @@ msgstr "Anterior"
 #: iati_sphinx_theme/relations.html:12
 msgid "Next"
 msgstr "Siguiente"
+
+#~ msgid "IATI Tools"
+#~ msgstr "Herramientas de IATI"
 

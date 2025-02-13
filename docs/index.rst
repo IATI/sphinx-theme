@@ -57,7 +57,7 @@ This should be a link to the Github repository for the documentation site, and i
 :code:`header_title_text`
 -------------------------
 
-The site's title to display in the header and navigation.
+The site's title to display in the header and navigation. This is usually the name of the tool being documented, e.g. "IATI Validator".
 
 :code:`languages`
 -----------------
