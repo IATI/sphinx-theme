@@ -5,6 +5,13 @@ IATI Sphinx Theme
 .. toctree::
    :titlesonly:
    :maxdepth: 1
+   :hidden:
+
+   Home <self>
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
    :caption: Development
    :hidden:
 
