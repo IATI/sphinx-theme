@@ -15,6 +15,10 @@
     "vite": "^5.4.11"
   },
   "release": {
+    "branches": [
+      "main",
+      "fix-publish"
+    ],
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
