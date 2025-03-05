@@ -1,11 +1,11 @@
-name: Release
+name: Publish to PyPI
+
 on:
-  push:
-    branches:
-      - "main"
+  release:
+    types: [published]
 
 jobs:
-  release:
+  publish:
     runs-on: ubuntu-latest
     environment:
       name: pypi
@@ -25,8 +25,9 @@ jobs:
         run: npm ci
       - name: Build CSS
         run: npm run build
-      - name: Release
-        run: npx semantic-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+      - name: Install build dependencies
+        run: pip install --upgrade build
+      - name: Build package
+        run: python -m build
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
