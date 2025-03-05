@@ -38,11 +38,7 @@ html_theme = "iati_sphinx_theme"
 html_theme_options = {
     "github_repository": "https://github.com/IATI/sphinx-theme",
     "header_title_text": _("IATI Sphinx Theme"),
-    "languages": {
-        "en": "English",
-        "fr": "Français",
-        "es": "Español",
-    },
+    "languages": ["en", "fr", "es"],
     "tool_name": _("IATI Sphinx Theme"),
     "tool_url": "https://github.com/IATI/sphinx-theme",
 }

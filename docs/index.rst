@@ -44,11 +44,7 @@ This theme has multiple options, which can be configured using the :code:`html_t
   html_theme_options = {
     "github_repository": "https://github.com/organisation/repository",
     "header_title_text": "Title",
-    "languages": {
-      "en": "English",
-      "fr": "Français",
-      "es": "Español",
-    },
+    "languages": ["en", "fr", "es"],
     "plausible_domain": "example.com",
     "tool_name": "IATI Tool",
     "tool_url": "https://tool.iatistandard.org/",
@@ -69,9 +65,7 @@ The site's title to display in the header and navigation. This is usually the na
 :code:`languages`
 -----------------
 
-A dictionary of languages which the documentation is available in, used to populate the language switcher component.
-
-For each entry, the keys (:code:`en`) is used to send the user to the correct site, and the value (:code:`English`) is displayed in the language switcher.
+A list of languages which the documentation is available in, used to populate the language switcher component. Defaults to English only.
 
 :code:`plausible_domain`
 ------------------------
