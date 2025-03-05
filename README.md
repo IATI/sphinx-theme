@@ -107,3 +107,7 @@ A `Makefile` exists to make running the commands easier:
    ```
    make compile
    ```
+
+### Release process
+
+To publish a new version, raise a PR to `main`, updating the version in `pyproject.toml`. Once merged, create a git tag and GitHub release for the new version, with naming `vX.Y.Z`. This will trigger the package to be published to PyPI.
