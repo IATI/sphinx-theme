@@ -6,7 +6,8 @@
  } %}
 
 {% set default_tool_nav_items = { project: pathto('', 1) } %}
-{% set tool_nav_items = theme_tool_nav_items or default_tool_nav_items %}
+{% set tool_nav_items = theme_tool_nav_items or {} %}
+{% set noop = tool_nav_items.update(default_tool_nav_items) %}
 
 <div class="iati-mobile-nav js-iati-mobile-nav">
   <div class="iati-mobile-nav__overlay js-iati-mobile-overlay"></div>
