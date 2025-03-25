@@ -16,7 +16,7 @@ _ = get_translation(MESSAGE_CATALOG_NAME)
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "IATI Sphinx Theme"
+project = str(_("IATI Sphinx Theme"))
 author = "IATI Secretariat"
 language = "en"
 
@@ -37,10 +37,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 html_theme = "iati_sphinx_theme"
 html_theme_options = {
     "github_repository": "https://github.com/IATI/sphinx-theme",
-    "header_title_text": _("IATI Sphinx Theme"),
     "languages": ["en", "fr", "es"],
-    "tool_name": _("IATI Sphinx Theme"),
-    "tool_url": "https://github.com/IATI/sphinx-theme",
 }
 
 todo_include_todos = True
