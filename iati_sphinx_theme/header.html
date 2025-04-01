@@ -1,16 +1,13 @@
-{% set general_nav_items = [
-  {"text": _("About IATI"), "link": "https://iatistandard.org/en/about/"},
-  {"text": _("Use Data"), "link": "https://iatistandard.org/en/using-data/"},
-  {"text": _("Publish Data"), "link": "https://iatistandard.org/en/guidance/publishing-data/"},
-  {"text": _("Contact"), "link": "https://iatistandard.org/guidance/get-support/"},
-] %}
+{% set general_nav_items = {
+  _("About IATI"): "https://iatistandard.org/en/about/",
+  _("Use Data"): "https://iatistandard.org/en/using-data/",
+  _("Publish Data"): "https://iatistandard.org/en/guidance/publishing-data/",
+  _("Contact"): "https://iatistandard.org/guidance/get-support/",
+ } %}
 
-{% set tool_nav_items = [
-  {"text": theme_tool_name, "link": theme_tool_url},
-  {"text": theme_header_title_text + ": " + _("Documentation"), "link": pathto('', 1)},
-] if theme_tool_name else [
-  {"text": theme_header_title_text + ": " + _("Documentation"), "link": pathto('', 1)},
-]%}
+{% set default_tool_nav_items = { project: pathto('', 1) } %}
+{% set tool_nav_items = theme_tool_nav_items or {} %}
+{% set noop = tool_nav_items.update(default_tool_nav_items) %}
 
 <div class="iati-mobile-nav js-iati-mobile-nav">
   <div class="iati-mobile-nav__overlay js-iati-mobile-overlay"></div>
@@ -22,16 +19,16 @@
         </button>
       </div>
       <ul>
-        {% for nav_item in tool_nav_items %}
+        {% for text, link in tool_nav_items.items() %}
           <li class="iati-mobile-nav__item">
-            <a href="{{ nav_item['link'] }}" class="iati-mobile-nav__link">{{ nav_item["text"] }}</a>
+            <a href="{{ link }}" class="iati-mobile-nav__link">{{ text }}</a>
           </li>
         {% endfor %}
       </ul>
       <ul>
-        {% for nav_item in general_nav_items %}
+        {% for text, link in general_nav_items.items() %}
           <li class="iati-mobile-nav__item">
-            <a href="{{ nav_item['link'] }}" class="iati-mobile-nav__link">{{ nav_item["text"] }}</a>
+            <a href="{{ link }}" class="iati-mobile-nav__link">{{ text }}</a>
           </li>
         {% endfor %}
       </ul>
@@ -47,9 +44,9 @@
       </a>
       <nav class="iati-header__general-nav">
         <ul class="iati-piped-list">
-          {% for nav_item in general_nav_items %}
+          {% for text, link in general_nav_items.items() %}
             <li>
-              <a href="{{ nav_item['link'] }}">{{ nav_item["text"] }}</a>
+              <a href="{{ link }}">{{ text }}</a>
             </li>
           {% endfor %}
         </ul>
@@ -75,16 +72,16 @@
       </div>
 
       <div class="iati-header-title">
-        <p class="iati-header-title__eyebrow">{{ _("IATI Tools: Documentation") }}</p>
-        <p class="iati-header-title__heading">{{ theme_header_title_text }}</p>
+        <p class="iati-header-title__eyebrow">{{ theme_header_eyebrow_text or _("IATI Tools: Documentation") }} </p>
+        <p class="iati-header-title__heading">{{ theme_header_title_text or project }}</p>
       </div>
 
       <div class="iati-header__nav">
         <nav>
           <ul class="iati-tool-nav">
-            {% for nav_item in tool_nav_items %}
+            {% for text, link in tool_nav_items.items() %}
               <li>
-                <a href="{{ nav_item['link'] }}" class="iati-tool-nav-link">{{ nav_item["text"] }}</a>
+                <a href="{{ link }}" class="iati-tool-nav-link">{{ text }}</a>
               </li>
             {% endfor %}
           </ul>

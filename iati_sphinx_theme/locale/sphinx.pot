@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-02-13 10:11+0200\n"
+"POT-Creation-Date: 2025-03-25 15:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,24 +63,19 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
-#: iati_sphinx_theme/header.html:10 iati_sphinx_theme/header.html:12
-#: iati_sphinx_theme/page.html:8 iati_sphinx_theme/page.html:18
-msgid "Documentation"
-msgstr ""
-
-#: iati_sphinx_theme/header.html:19 iati_sphinx_theme/header.html:73
+#: iati_sphinx_theme/header.html:16 iati_sphinx_theme/header.html:70
 msgid "Menu"
 msgstr ""
 
-#: iati_sphinx_theme/header.html:21
+#: iati_sphinx_theme/header.html:18
 msgid "Close"
 msgstr ""
 
-#: iati_sphinx_theme/header.html:68 iati_sphinx_theme/search.html:15
+#: iati_sphinx_theme/header.html:65 iati_sphinx_theme/search.html:15
 msgid "Search"
 msgstr ""
 
-#: iati_sphinx_theme/header.html:78
+#: iati_sphinx_theme/header.html:75
 msgid "IATI Tools: Documentation"
 msgstr ""
 

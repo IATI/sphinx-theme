@@ -43,11 +43,13 @@ This theme has multiple options, which can be configured using the :code:`html_t
 
   html_theme_options = {
     "github_repository": "https://github.com/organisation/repository",
-    "header_title_text": "Title",
+    "header_title_text": "IATI Sphinx Theme",
+    "header_eyebrow_text": "IATI Tools: Documentation",
     "languages": ["en", "fr", "es"],
     "plausible_domain": "example.com",
-    "tool_name": "IATI Tool",
-    "tool_url": "https://tool.iatistandard.org/",
+    "tool_nav_items": {
+      "IATI Tool": "https://tool.iatistandard.org/"
+    },
   }
 
 There is more information on each option below.
@@ -60,7 +62,14 @@ This should be a link to the Github repository for the documentation site, and i
 :code:`header_title_text`
 -------------------------
 
-The site's title to display in the header and navigation. This is usually the name of the tool being documented, e.g. "IATI Validator".
+The title text to display in the header.
+Defaults to the value of :code:`project` in :code:`conf.py`.
+
+:code:`header_eyebrow_text`
+---------------------------
+
+The text above the title in the header.
+Defaults to "IATI Tools: Documentation".
 
 :code:`languages`
 -----------------
@@ -81,15 +90,11 @@ For example, for the Sphinx site :code:`docs.example.com`, use :code:`example.co
     "plausible_domain": "example.com"
   }
 
-:code:`tool_name`
------------------
+:code:`tool_nav_items`
+----------------------
 
-The name of the tool which your Sphinx site documents.
-
-:code:`tool_url`
-----------------
-
-The URL of the tool which your Sphinx site documents.
+Items to include in the header tool nav bar.
+Defaults to a single item that links back to the site's homepage.
 
 Translation
 ===========
