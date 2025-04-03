@@ -96,6 +96,22 @@ For example, for the Sphinx site :code:`docs.example.com`, use :code:`example.co
 Items to include in the header tool nav bar.
 Defaults to a single item that links back to the site's homepage.
 
+Custom roles
+============
+
+:code:`iati-reference`
+----------------------
+
+When referencing elements of the standard, use the :code:`iati-reference` role. For example:
+
+.. code-block:: rst
+
+  :iati-reference:`iati-activities/iati-activity/iati-identifier`
+
+The code above will apply the following styles:
+
+:iati-reference:`iati-activities/iati-activity/iati-identifier`
+
 Translation
 ===========
 
