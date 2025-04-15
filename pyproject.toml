@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "iati-sphinx-theme"
-version="2.1.0"
+version="2.2.0"
 readme = "README.md"
 dynamic = ["description"]
 dependencies = []
