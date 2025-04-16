@@ -6,7 +6,7 @@
     "build:watch": "npm run build -- --watch"
   },
   "devDependencies": {
-    "iati-design-system": "^3.12.0",
+    "iati-design-system": "^3.13.0",
     "sass": "^1.75.0",
     "vite": "^5.4.11"
   }
