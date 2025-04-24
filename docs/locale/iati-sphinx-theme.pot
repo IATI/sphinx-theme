@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-22 14:11+0200\n"
+"POT-Creation-Date: 2025-04-24 09:06+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.14.0\n"
 
-#: conf.py:39 conf.py:67
-msgid "IATI Sphinx Theme"
+#: conf.py:41
+msgid "IATI Sphinx Theme: Documentation"
 msgstr ""
 
-#: conf.py:46
-msgid "IATI Example Tool"
+#: conf.py:42
+msgid "IATI Sphinx Theme"
 msgstr ""
 

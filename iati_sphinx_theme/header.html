@@ -5,7 +5,7 @@
   _("Contact"): "https://iatistandard.org/guidance/get-support/",
  } %}
 
-{% set default_tool_nav_items = { project: pathto('', 1) } %}
+{% set default_tool_nav_items = { theme_project_title: pathto('', 1) } %}
 {% set tool_nav_items = theme_tool_nav_items or {} %}
 {% set noop = tool_nav_items.update(default_tool_nav_items) %}
 
@@ -73,7 +73,7 @@
 
       <div class="iati-header-title">
         <p class="iati-header-title__eyebrow">{{ theme_header_eyebrow_text or _("IATI Tools: Documentation") }} </p>
-        <p class="iati-header-title__heading">{{ theme_header_title_text or project }}</p>
+        <p class="iati-header-title__heading">{{ theme_header_title_text or theme_project_title }}</p>
       </div>
 
       <div class="iati-header__nav">
