@@ -47,6 +47,7 @@ This theme has multiple options, which can be configured using the :code:`html_t
     "header_eyebrow_text": "IATI Tools: Documentation",
     "languages": ["en", "fr", "es"],
     "plausible_domain": "example.com",
+    "project_title": "IATI Sphinx Theme: Documentation",
     "tool_nav_items": {
       "IATI Tool": "https://tool.iatistandard.org/"
     },
@@ -89,6 +90,11 @@ For example, for the Sphinx site :code:`docs.example.com`, use :code:`example.co
   html_theme_options = {
     "plausible_domain": "example.com"
   }
+
+:code:`project_title`
+---------------------
+
+The text to use in the breadcrumb and tool navigation components.
 
 :code:`tool_nav_items`
 ----------------------
