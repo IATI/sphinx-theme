@@ -10,15 +10,20 @@ dynamic = ["description"]
 dependencies = []
 
 [project.optional-dependencies]
+docs = [
+    "sphinxcontrib-video",
+    "sphinxcontrib-youtube"
+]
 dev = [
     "black",
+    "iati-sphinx-theme[docs]",
     "isort",
     "flake8",
     "Flake8-pyproject",
     "mypy",
     "sphinx-autobuild",
     "sphinx-intl",
-    "types-docutils",
+    "types-docutils"
 ]
 
 [project.entry-points."sphinx.html_themes"]
