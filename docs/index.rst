@@ -12,6 +12,14 @@ IATI Sphinx Theme
 .. toctree::
    :titlesonly:
    :maxdepth: 1
+   :caption: Examples
+   :hidden:
+
+   examples/videos
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
    :caption: Development
    :hidden:
 
