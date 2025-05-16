@@ -19,6 +19,9 @@ dev = [
     "sphinx-autobuild",
     "sphinx-intl",
     "types-docutils",
+    "sphinxcontrib-video",
+    "sphinxcontrib-youtube",
+
 ]
 
 [project.entry-points."sphinx.html_themes"]
