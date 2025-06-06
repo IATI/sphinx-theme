@@ -2,7 +2,9 @@
 
 ## How do I use IATI Sphinx Theme?
 
-Please see the [IATI Sphinx Theme Documentation](https://iati-sphinx-theme.readthedocs-hosted.com/en/latest/) for usage instructions.
+See the [IATI Sphinx Theme Documentation](https://iati-sphinx-theme.readthedocs-hosted.com/en/latest/) for usage instructions.
+
+If you are creating or editing an IATI documentation site, see the [IATI Docs Base](https://github.com/IATI/iati-docs-base) for relevant information.
 
 ## How do I contribute to IATI Sphinx Theme?
 
@@ -76,37 +78,10 @@ To run a local version of the theme with another project, e.g. `my-docs`, take t
 
 ### Translation
 
-Follow the steps below to translate the theme's built-in strings from the HTML templates in the `iati_sphinx_theme` directory.
-The message catalog name is `sphinx.[pot|po|mo]` and is found in the `iati_sphinx_theme/locale` directory.
-These are bundled with the published theme in order for consumers to have access to the translations.
+The Sphinx theme itself contains both built-in strings that cannot be changed and strings that can be configured by the user via `conf.py`. To translate these, see [the sphinx-theme documentation](https://iati-sphinx-theme.readthedocs-hosted.com/en/latest/)
 
-A `Makefile` exists to make running the commands easier:
+For instructions on translating an IATI documentation site that uses this theme, see the [iati-docs-base](https://github.com/IATI/iati-docs-base).  
 
-1. Extract text into `.pot` files
-
-   ```
-   make extract
-   ```
-
-2. Update existing `.po` files based on `.pot` files
-
-   ```
-   make update
-   ```
-
-3. Optionally, initialise a `.po` file for a new language
-
-   ```
-   make init lang=es
-   ```
-
-4. Add translations to the `.po` files
-
-5. Compile to `.mo` files (only applies to the theme's built-in strings, so that they can be bundled with the theme)
-
-   ```
-   make compile
-   ```
 
 ### Release process
 
