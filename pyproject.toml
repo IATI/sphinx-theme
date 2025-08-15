@@ -16,6 +16,7 @@ docs = [
 ]
 dev = [
     "black",
+    "debugpy",
     "iati-sphinx-theme[docs]",
     "isort",
     "flake8",
