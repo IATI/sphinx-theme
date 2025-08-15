@@ -42,6 +42,7 @@ html_theme_options = {
     "languages": ["en", "fr", "es"],
     "project_title": _("IATI Sphinx Theme: Documentation"),
     "header_title_text": _("IATI Sphinx Theme"),
+    "show_download_links": True,
 }
 
 # Add any paths that contain custom static files (such as style sheets, videos,
