@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-25 15:55+0200\n"
+"POT-Creation-Date: 2025-09-01 14:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.14.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: iati_sphinx_theme/footer.html:7
 msgid "Additional Information"
@@ -38,17 +38,20 @@ msgid "Documentation licensed under <a href=\"%(url)s\">CC BY 4.0</a>."
 msgstr "Documentación bajo licencia <a href=\"%(url)s\">CC BY 4.0</a>."
 
 #: iati_sphinx_theme/footer.html:23
-msgid "Privacy Policy"
-msgstr "Política de privacidad"
+msgid "Privacy"
+msgstr "Privacidad"
+
+#: iati_sphinx_theme/footer.html:24
+msgid "Cookies"
+msgstr "Cookies"
+
+#: iati_sphinx_theme/footer.html:25
+msgid "Copyright"
+msgstr "Derechos de autor"
 
 #: iati_sphinx_theme/footer.html:26
-#, python-format
-msgid ""
-"Copyright %(current_year)s United Nations Development Programme, on "
-"behalf of the IATI Secretariat"
-msgstr ""
-"Copyright %(current_year)s Programa de las Naciones Unidas para el "
-"Desarrollo, en nombre de la Secretaría de la IATI"
+msgid "Data Removal"
+msgstr "Supresión de datos"
 
 #: iati_sphinx_theme/header.html:2
 msgid "About IATI"
@@ -99,4 +102,14 @@ msgstr "Siguiente"
 
 #~ msgid "Documentation"
 #~ msgstr "Documentación"
+
+#~ msgid ""
+#~ "Copyright %(current_year)s United Nations "
+#~ "Development Programme, on behalf of the"
+#~ " IATI Secretariat"
+#~ msgstr ""
+#~ "Copyright %(current_year)s Programa de las "
+#~ "Naciones Unidas para el Desarrollo, en"
+#~ " nombre de la Secretaría de la "
+#~ "IATI"
 
