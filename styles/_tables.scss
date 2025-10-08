@@ -1,7 +1,13 @@
 @use "pkg:iati-design-system" as *;
 
-table {
-  p {
-    margin: 0;
+// For complex table cells that still contain paragraphs,
+// remove margin and reduce line-height to match design system expectations
+.iati-table table {
+  td,
+  th {
+    p {
+      margin: 0;
+      line-height: 1.5;
+    }
   }
 }
