@@ -204,6 +204,11 @@ def get_latex_elements() -> dict[str, Any]:
     return {
         "papersize": "a4paper",
         "pointsize": "11pt",
+        # These PDFs are downloaded and read on screen, not printed and
+        # bound - so drop the book-style defaults (mirrored two-sided
+        # margins, and blank pages inserted to force chapters onto a
+        # right-hand page).
+        "extraclassoptions": "oneside,openany",
         "preamble": get_latex_preamble(),
         "fontpkg": get_latex_fontpkg(),
         "fncychap": "",  # Disable default chapter styling, use custom
@@ -224,7 +229,12 @@ def get_latex_elements() -> dict[str, Any]:
             # Verbatim/code styling
             "VerbatimColor={RGB}{248,248,248},"
             "VerbatimBorderColor={RGB}{200,200,200},"
-            "verbatimborder=0.5pt"
+            "verbatimborder=0.5pt,"
+            # Sphinx tolerates a code line overflowing its box by up to 3
+            # characters' width before it force-wraps mid-word - dropping
+            # that to 0 stops long unbroken strings (e.g. URLs) spilling
+            # past the box edge.
+            "verbatimmaxoverfull=0"
         ),
         # Babel language setting
         "babel": r"\usepackage[english]{babel}",
@@ -244,10 +254,16 @@ def configure_latex_defaults(
         config: The Sphinx configuration object.
     """
     # Our brand fonts are loaded via fontspec, which only runs under
-    # XeLaTeX/LuaLaTeX. Default to xelatex unless a project has already
+    # XeLaTeX/LuaLaTeX. Default to lualatex unless a project has already
     # chosen an engine other than Sphinx's own pdflatex default.
+    #
+    # LuaLaTeX, not XeLaTeX: Sphinx's force-wrap mechanism for long
+    # unbroken tokens (e.g. URLs in code blocks) silently fails under
+    # XeLaTeX - it measures the line as needing a wrap, but the wrapped
+    # text still overflows the box uncorrected. The same content wraps
+    # correctly under LuaLaTeX, which fontspec supports identically.
     if config.latex_engine == "pdflatex":
-        config.latex_engine = "xelatex"
+        config.latex_engine = "lualatex"
 
     theme_defaults = get_latex_elements()
 

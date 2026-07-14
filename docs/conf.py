@@ -7,8 +7,16 @@
 # Project-specific settings are imported from project_info.py.
 
 import os
+import sys
 
 import sphinx.application
+
+# Make project_info importable regardless of how Sphinx is invoked. `python -m
+# sphinx`/sphinx-autobuild add the current working directory to sys.path
+# automatically when run from this directory, but installed console scripts
+# like `sphinx-build` (e.g. via `make latexpdf`) don't - their sys.path[0] is
+# their own bin directory instead.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Import project-specific settings
 from project_info import redoc  # noqa: F401 - picked up by Sphinx as a config value
@@ -89,19 +97,6 @@ todo_include_todos = True
 
 html_context = {}
 
-if os.environ.get("READTHEDOCS") == "True":
-    project_slug = os.environ.get("READTHEDOCS_PROJECT")
-    version_slug = os.environ.get("READTHEDOCS_VERSION")
-    language_slug = os.environ.get("READTHEDOCS_LANGUAGE", "en")
-
-    # RTD's standard download URL pattern
-    pdf_url = (
-        f"https://{project_slug}.readthedocs-hosted.com/_/downloads/"
-        f"{language_slug}/{version_slug}/pdf/"
-    )
-
-    html_context["pdf_url"] = pdf_url
-
 # -- Options for LaTeX/PDF output -----------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#latex-options
 
@@ -114,6 +109,25 @@ latex_documents = [
         "manual",  # theme
     ),
 ]
+
+if os.environ.get("READTHEDOCS") == "True":
+    project_slug = os.environ.get("READTHEDOCS_PROJECT")
+    version_slug = os.environ.get("READTHEDOCS_VERSION")
+    language_slug = os.environ.get("READTHEDOCS_LANGUAGE", "en")
+
+    # RTD's standard download URL pattern
+    pdf_url = (
+        f"https://{project_slug}.readthedocs-hosted.com/_/downloads/"
+        f"{language_slug}/{version_slug}/pdf/"
+    )
+
+    html_context["pdf_url"] = pdf_url
+else:
+    # Local dev builds have no RTD-hosted PDF, so link to one built alongside
+    # the HTML instead - see .vscode/tasks.json, which builds it and copies
+    # it to the site root before Sphinx Autobuild starts.
+    pdf_filename = latex_documents[0][1].replace(".tex", ".pdf")
+    html_context["pdf_url"] = f"/{pdf_filename}"
 
 # -- Options for Texinfo output -------------------------------------------
 

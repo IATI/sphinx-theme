@@ -11,7 +11,8 @@
                 "docs",
                 "docs/_build/html"
             ],
-            "justMyCode": false
+            "justMyCode": false,
+            "preLaunchTask": "Build PDF for Autobuild"
         }
     ]
 }

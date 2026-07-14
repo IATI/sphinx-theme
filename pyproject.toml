@@ -35,6 +35,9 @@ profile = "black"
 
 [tool.flake8]
 max-line-length = 88
+per-file-ignores = """
+    docs/conf.py: E402
+"""
 
 [tool.mypy]
 strict = true

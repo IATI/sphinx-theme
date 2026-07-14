@@ -10,7 +10,14 @@ build:
   os: ubuntu-24.04
   tools:
     python: "3.13"
+    nodejs: "20"
   jobs:
+    pre_install:
+      # Compile the theme's CSS - iati_sphinx_theme/static/css/style.css is
+      # gitignored (it's a build artifact of `npm run build`), so it doesn't
+      # exist in a fresh clone until this runs.
+      - npm ci
+      - npm run build
     pre_build:
       - python -c "import iati_sphinx_theme, shutil, os; src = os.path.join(os.path.dirname(iati_sphinx_theme.__file__), \"locale\"); shutil.copytree(src, \"docs/locale\", dirs_exist_ok=True)"
       - pybabel compile -d docs/locale --domain=sphinx
