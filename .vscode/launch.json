@@ -7,10 +7,9 @@
             "request": "launch",
             "module": "sphinx_autobuild",
             "args": [
+                "-b", "dirhtml",
                 "docs",
                 "docs/_build/html"
-                "--watch",
-                "."
             ],
             "justMyCode": false
         }

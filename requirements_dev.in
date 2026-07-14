@@ -1,0 +1,14 @@
+-r requirements.txt
+
+sphinx-autobuild
+black
+
+# Kept beyond the template baseline: this repo ships the iati_sphinx_theme
+# package itself, so its CI also lints the package source with isort,
+# flake8, and mypy (see .github/workflows/ci.yml).
+debugpy
+isort
+flake8
+Flake8-pyproject
+mypy
+types-docutils

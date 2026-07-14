@@ -12,7 +12,7 @@ jobs:
       - name: Install dev requirements
         run: pip install -r requirements_dev.txt
       - name: Check black
-        run: black --check iati_sphinx_theme docs
+        run: black --check .
       - name: Check isort
         run: isort --check-only iati_sphinx_theme docs
       - name: Check flake8
