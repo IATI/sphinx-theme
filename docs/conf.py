@@ -56,6 +56,7 @@ extensions = [
     "sphinxcontrib.redoc",
     "sphinxcontrib.video",
     "sphinxcontrib.youtube",
+    "iati_sphinx_theme",  # Register theme as extension for LaTeX defaults
 ]
 
 templates_path = ["_templates"]
@@ -100,6 +101,19 @@ if os.environ.get("READTHEDOCS") == "True":
     )
 
     html_context["pdf_url"] = pdf_url
+
+# -- Options for LaTeX/PDF output -----------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#latex-options
+
+latex_documents = [
+    (
+        "index",  # startdocname
+        "iati-sphinx-theme.tex",  # targetname
+        "IATI Sphinx Theme Documentation",  # title
+        "IATI Secretariat",  # author
+        "manual",  # theme
+    ),
+]
 
 # -- Options for Texinfo output -------------------------------------------
 

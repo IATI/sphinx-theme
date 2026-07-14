@@ -8,6 +8,7 @@ import sphinx.application
 from docutils import nodes
 from docutils.parsers.rst.states import Inliner
 from sphinx.writers.html5 import HTML5Translator
+from sphinx.writers.latex import LaTeXTranslator
 
 SUPPORTED_LANGUAGES = {
     "en": "English",
@@ -65,6 +66,16 @@ def depart_table_wrapper(self: HTML5Translator, node: nodes.Node) -> None:
     self.body.append("</div>\n")
 
 
+def visit_table_wrapper_latex(self: LaTeXTranslator, node: nodes.Node) -> None:
+    """LaTeX visitor for table wrapper - just pass through to children."""
+    pass
+
+
+def depart_table_wrapper_latex(self: LaTeXTranslator, node: nodes.Node) -> None:
+    """LaTeX departure for table wrapper - no-op."""
+    pass
+
+
 def setup(app: sphinx.application.Sphinx) -> dict[str, Any]:
     app.add_html_theme("iati_sphinx_theme", path.abspath(path.dirname(__file__)))
     app.config["html_permalinks_icon"] = "#"
@@ -84,8 +95,17 @@ def setup(app: sphinx.application.Sphinx) -> dict[str, Any]:
 
     # Register custom node and event to wrap tables in div.iati-table
     # for design system compatibility
-    app.add_node(table_wrapper, html=(visit_table_wrapper, depart_table_wrapper))
+    app.add_node(
+        table_wrapper,
+        html=(visit_table_wrapper, depart_table_wrapper),
+        latex=(visit_table_wrapper_latex, depart_table_wrapper_latex),
+    )
     app.connect("doctree-resolved", wrap_tables_in_container)
+
+    # Configure LaTeX/PDF defaults for IATI branding
+    from . import latex
+
+    app.connect("config-inited", latex.configure_latex_defaults)
 
     return {
         "parallel_read_safe": True,
