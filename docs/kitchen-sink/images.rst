@@ -63,17 +63,6 @@ sapiente veritatis doloribus accusantium molestiae modi recusandae
 excepturi facere, corrupti expedita sit nihil temporibus eius sequi
 animi, illo libero labore fuga.
 
-Vector SVG images
------------------
-
-SVG images render in both the HTML site and the downloadable PDF - the theme
-converts SVGs to PDF automatically during the LaTeX build (see
-:doc:`../pdf-styling`). This one is a vector drawn in the IATI brand colours:
-
-.. image:: svg-example.svg
-   :alt: Bar chart drawn as a vector SVG in the IATI brand colours
-   :width: 360
-
 Figures
 -------
 

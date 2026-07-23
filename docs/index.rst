@@ -16,6 +16,7 @@ IATI Sphinx Theme
    :hidden:
 
    examples/videos
+   Images <examples/images>
 
 .. toctree::
    :titlesonly:
