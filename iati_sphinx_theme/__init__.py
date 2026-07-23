@@ -7,8 +7,11 @@ from typing import Any
 import sphinx.application
 from docutils import nodes
 from docutils.parsers.rst.states import Inliner
+from sphinx.util import logging
 from sphinx.writers.html5 import HTML5Translator
 from sphinx.writers.latex import LaTeXTranslator
+
+logger = logging.getLogger(__name__)
 
 SUPPORTED_LANGUAGES = {
     "en": "English",
@@ -106,6 +109,21 @@ def setup(app: sphinx.application.Sphinx) -> dict[str, Any]:
     from . import latex
 
     app.connect("config-inited", latex.configure_latex_defaults)
+
+    # Enable SVG images in PDF/LaTeX output. Sphinx's LaTeX builder only accepts
+    # PDF/PNG/JPEG, so without a converter SVGs are silently dropped (issue #43).
+    # sphinxcontrib.rsvgconverter shells out to rsvg-convert at build time;
+    # importing it is safe even when that binary is absent, so this can never
+    # break HTML builds - the converter is inert for HTML and only activates for
+    # the LaTeX builder. Consumers still need rsvg-convert (librsvg2-bin) in
+    # their build environment for SVGs to actually render - see docs/pdf-styling.
+    try:
+        app.setup_extension("sphinxcontrib.rsvgconverter")
+    except Exception:
+        logger.warning(
+            "sphinxcontrib.rsvgconverter unavailable; "
+            "SVG images will not render in PDF output"
+        )
 
     return {
         "parallel_read_safe": True,

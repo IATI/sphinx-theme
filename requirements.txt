@@ -130,6 +130,8 @@ sphinxcontrib-redoc @ git+https://github.com/OpenDataServices/sphinxcontrib-redo
     # via -r requirements.in
 sphinxcontrib-serializinghtml==2.0.0
     # via sphinx
+sphinxcontrib-svg2pdfconverter==2.1.0
+    # via iati-sphinx-theme
 sphinxcontrib-video==0.4.2
     # via
     #   -r requirements.in

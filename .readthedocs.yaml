@@ -11,10 +11,15 @@ build:
   tools:
     python: "3.13"
     nodejs: "20"
+  apt_packages:
+    # rsvg-convert (librsvg) converts SVG images to PDF during the LaTeX/PDF
+    # build. Without it, Sphinx's LaTeX builder silently drops SVGs (issue #43).
+    - librsvg2-bin
   jobs:
     pre_install:
-      # Compile the theme's CSS - iati_sphinx_theme/static/css/style.css is
-      # gitignored (it's a build artifact of `npm run build`), so it doesn't
+      # Build the theme's assets from the pinned iati-design-system: the CSS
+      # (static/css/style.css) plus the PDF brand assets (colours and logo).
+      # These are gitignored build artifacts of `npm run build`, so they don't
       # exist in a fresh clone until this runs.
       - npm ci
       - npm run build

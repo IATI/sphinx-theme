@@ -27,8 +27,10 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// texlive-luatex/-latex-extra/-fonts-recommended + latexmk + xindy give us
 	// the LuaLaTeX toolchain the theme's PDF styling (iati_sphinx_theme/latex.py)
-	// needs to actually build a PDF - see docs/pdf-styling.rst.
-	"postCreateCommand": "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends texlive-luatex texlive-latex-extra texlive-fonts-recommended latexmk xindy && rm -rf /var/lib/apt/lists/* && pip3 install --user -r requirements_dev.txt && pip3 install --user sphinx-autobuild && pip install -e .",
+	// needs to actually build a PDF - see docs/pdf-styling.rst. librsvg2-bin
+	// provides rsvg-convert, which converts SVG images to PDF during the build
+	// (without it Sphinx silently drops SVGs from PDF output - issue #43).
+	"postCreateCommand": "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends texlive-luatex texlive-latex-extra texlive-fonts-recommended latexmk xindy librsvg2-bin && rm -rf /var/lib/apt/lists/* && pip3 install --user -r requirements_dev.txt && pip3 install --user sphinx-autobuild && pip install -e .",
 
 	// Configure tool-specific properties.
 	"customizations": {
