@@ -100,13 +100,18 @@ html_context = {}
 # -- Options for LaTeX/PDF output -----------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#latex-options
 
+# Derived from project_info so this synced conf.py stays identical across
+# repos. The .tex/.pdf basename is internal - the local download link derives
+# from it, and RTD uses its own URL pattern - so a slug of the project name is
+# enough. These values populate the PDF cover (\@title, \@author).
+latex_project_slug = project.lower().replace(" ", "-")
 latex_documents = [
     (
         "index",  # startdocname
-        "iati-sphinx-theme.tex",  # targetname
-        "IATI Sphinx Theme Documentation",  # title
-        "IATI Secretariat",  # author
-        "manual",  # theme
+        f"{latex_project_slug}.tex",  # targetname
+        f"{project} Documentation",  # title
+        author,  # author
+        "manual",  # documentclass
     ),
 ]
 

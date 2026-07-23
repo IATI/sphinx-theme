@@ -5,11 +5,40 @@ IATI branding. Projects using this theme will automatically get these
 defaults, but can override any setting in their own conf.py.
 """
 
+import functools
+import json
 import os
-from typing import Any
+from typing import Any, cast
 
 import sphinx.application
 import sphinx.config
+from sphinx.util import logging
+
+logger = logging.getLogger(__name__)
+
+
+@functools.lru_cache(maxsize=1)
+def get_brand_colors() -> dict[str, str]:
+    """Return the IATI brand colours as ``{name: "RRGGBB"}`` hex strings.
+
+    These are generated from the pinned ``iati-design-system`` package by
+    ``npm run build`` (see ``scripts/generate-brand-assets.mjs``) and written
+    to ``_generated/brand_colors.json`` - the same build step that compiles
+    the theme's CSS. Raises ``FileNotFoundError`` if that step hasn't run.
+    """
+    theme_dir = os.path.dirname(os.path.abspath(__file__))
+    colors_path = os.path.join(theme_dir, "_generated", "brand_colors.json")
+    with open(colors_path, encoding="utf-8") as f:
+        data = json.load(f)
+    return cast(dict[str, str], data["colors"])
+
+
+def hex_to_rgb(hex_color: str) -> str:
+    """Convert an ``"RRGGBB"`` hex string to a LaTeX ``"R,G,B"`` (0-255) triple."""
+    r = int(hex_color[0:2], 16)
+    g = int(hex_color[2:4], 16)
+    b = int(hex_color[4:6], 16)
+    return f"{r},{g},{b}"
 
 
 def get_latex_preamble() -> str:
@@ -18,18 +47,20 @@ def get_latex_preamble() -> str:
     theme_dir = os.path.dirname(os.path.abspath(__file__))
     logo_path = os.path.join(theme_dir, "static", "logo-colour.png")
 
+    # Brand colours are derived from the design system at build time, so the
+    # \definecolor lines are generated here rather than hard-coded.
+    color_definitions = "\n".join(
+        rf"\definecolor{{{name}}}{{HTML}}{{{value}}}"
+        for name, value in get_brand_colors().items()
+    )
+
     return (
-        r"""
-% IATI Brand Colors
-\usepackage{xcolor}
-\definecolor{iatiorange}{HTML}{DB584B}
-\definecolor{iatiorange-light}{HTML}{FF7264}
-\definecolor{iatiteal}{HTML}{155366}
-\definecolor{iatiteal-light}{HTML}{448093}
-\definecolor{iatigrey}{HTML}{121212}
-\definecolor{iatigrey-light}{HTML}{686868}
-\definecolor{iatigreen}{HTML}{0A9172}
-\definecolor{iatipurple}{HTML}{6F3AAF}
+        "\n"
+        "% IATI Brand Colors - generated from the pinned iati-design-system by\n"
+        "% scripts/generate-brand-assets.mjs; do not hand-edit.\n"
+        "\\usepackage{xcolor}\n"
+        + color_definitions
+        + r"""
 
 % Page geometry
 \usepackage{geometry}
@@ -201,6 +232,12 @@ def get_latex_elements() -> dict[str, Any]:
     Returns:
         Dictionary suitable for Sphinx's latex_elements configuration.
     """
+    colors = get_brand_colors()
+    teal = hex_to_rgb(colors["iatiteal"])
+    orange = hex_to_rgb(colors["iatiorange"])
+    green = hex_to_rgb(colors["iatigreen"])
+    purple = hex_to_rgb(colors["iatipurple"])
+
     return {
         "papersize": "a4paper",
         "pointsize": "11pt",
@@ -213,17 +250,20 @@ def get_latex_elements() -> dict[str, Any]:
         "fontpkg": get_latex_fontpkg(),
         "fncychap": "",  # Disable default chapter styling, use custom
         "sphinxsetup": (
-            # Admonition styling
-            "noteBorderColor={RGB}{21,83,102},"  # iatiteal
+            # Admonition styling. Border colours are derived from the
+            # design-system palette (see get_brand_colors); the background
+            # tints are hand-picked light washes of each border colour and
+            # are not themselves design-system tokens.
+            f"noteBorderColor={{RGB}}{{{teal}}},"
             "noteborder=1pt,"
             "noteBgColor={RGB}{240,248,250},"
-            "warningBorderColor={RGB}{219,88,75},"  # iatiorange
+            f"warningBorderColor={{RGB}}{{{orange}}},"
             "warningborder=1pt,"
             "warningBgColor={RGB}{255,245,244},"
-            "tipBorderColor={RGB}{10,145,114},"  # iatigreen
+            f"tipBorderColor={{RGB}}{{{green}}},"
             "tipborder=1pt,"
             "tipBgColor={RGB}{240,253,250},"
-            "importantBorderColor={RGB}{111,58,175},"  # iatipurple
+            f"importantBorderColor={{RGB}}{{{purple}}},"
             "importantborder=1pt,"
             "importantBgColor={RGB}{248,244,253},"
             # Verbatim/code styling
@@ -262,10 +302,22 @@ def configure_latex_defaults(
     # XeLaTeX - it measures the line as needing a wrap, but the wrapped
     # text still overflows the box uncorrected. The same content wraps
     # correctly under LuaLaTeX, which fontspec supports identically.
+    # The brand colours (and logo) are generated from iati-design-system by
+    # `npm run build`. If that step hasn't run - e.g. a fresh checkout that
+    # only builds HTML - skip PDF branding rather than crash the build. This
+    # runs on config-inited for every builder, HTML included.
+    try:
+        theme_defaults = get_latex_elements()
+    except FileNotFoundError:
+        logger.warning(
+            "IATI brand assets not found - PDF branding skipped. Run "
+            "`npm run build` to generate them (see README). HTML output is "
+            "unaffected."
+        )
+        return
+
     if config.latex_engine == "pdflatex":
         config.latex_engine = "lualatex"
-
-    theme_defaults = get_latex_elements()
 
     # Get user's existing latex_elements or create empty dict
     # Note: At config-inited time, latex_elements may be an empty dict {}

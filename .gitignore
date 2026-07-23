@@ -8,6 +8,10 @@ dist
 # Node
 node_modules
 
+# Brand assets generated from iati-design-system at build time
+# (scripts/generate-brand-assets.mjs, run by `npm run build`)
+iati_sphinx_theme/_generated/
+
 # Translations
 .doctrees
 *.mo
