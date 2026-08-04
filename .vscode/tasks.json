@@ -1,0 +1,18 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build PDF for Autobuild",
+            "type": "shell",
+            "command": "mkdir -p _build/html && make latexpdf && cp _build/latex/*.pdf _build/html/",
+            "options": {
+                "cwd": "${workspaceFolder}/docs"
+            },
+            "presentation": {
+                "reveal": "silent",
+                "panel": "dedicated"
+            },
+            "problemMatcher": []
+        }
+    ]
+}

@@ -1,0 +1,62 @@
+name: Design system drift
+
+# The theme derives its brand assets (PDF colours and the logo) from a pinned
+# version of iati-design-system. That keeps builds reproducible, but means the
+# theme can silently fall behind the design system. This job checks, on a
+# schedule, whether the latest published iati-design-system would produce
+# different brand values than the pinned one - and fails (with an annotation)
+# if so, as a prompt to bump the pin in package.json deliberately.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # Mondays, 06:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+
+      - name: Install pinned dependencies
+        run: npm ci
+
+      - name: Generate brand assets from the pinned design system
+        run: |
+          npm run build
+          cp iati_sphinx_theme/_generated/brand_colors.json /tmp/pinned-colors.json
+          cp iati_sphinx_theme/static/logo-colour.svg /tmp/pinned-logo.svg
+
+      - name: Regenerate against the latest published design system
+        run: |
+          npm install iati-design-system@latest --no-save
+          npm run build
+
+      - name: Compare brand values
+        run: |
+          echo "Installed iati-design-system versions:"
+          npm ls iati-design-system || true
+
+          drift=0
+
+          if ! diff \
+            <(jq -S .colors /tmp/pinned-colors.json) \
+            <(jq -S .colors iati_sphinx_theme/_generated/brand_colors.json); then
+            echo "Brand colours differ between the pinned and latest design system."
+            drift=1
+          fi
+
+          if ! diff /tmp/pinned-logo.svg iati_sphinx_theme/static/logo-colour.svg > /dev/null; then
+            echo "Logo differs between the pinned and latest design system."
+            drift=1
+          fi
+
+          if [ "$drift" -eq 1 ]; then
+            echo "::warning::iati-design-system has changed brand assets since the pinned version. Bump the pin in package.json to adopt the changes."
+            exit 1
+          fi
+
+          echo "Brand assets are in sync with the latest iati-design-system."

@@ -2,12 +2,13 @@
   "name": "sphinx-theme",
   "type": "module",
   "scripts": {
-    "build": "vite build",
+    "build": "node scripts/generate-brand-assets.mjs && vite build",
     "build:watch": "npm run build -- --watch"
   },
   "devDependencies": {
     "iati-design-system": "^3.13.0",
     "sass": "^1.75.0",
+    "sharp": "^0.33.5",
     "vite": "^5.4.11"
   }
 }

@@ -12,10 +12,26 @@ jobs:
       - name: Install dev requirements
         run: pip install -r requirements_dev.txt
       - name: Check black
-        run: black --check iati_sphinx_theme docs
+        run: black --check .
       - name: Check isort
         run: isort --check-only iati_sphinx_theme docs
       - name: Check flake8
         run: flake8 iati_sphinx_theme docs
       - name: Check mypy
         run: mypy iati_sphinx_theme docs
+
+  build:
+    # Verifies the theme's build artifacts still generate cleanly against the
+    # pinned iati-design-system - i.e. the CSS compiles and the brand assets
+    # (colours + logo) can be derived from the design system's current file
+    # layout. Catches an upstream restructuring the moment the pin is bumped.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+      - name: Install dependencies
+        run: npm ci
+      - name: Build CSS and brand assets
+        run: npm run build

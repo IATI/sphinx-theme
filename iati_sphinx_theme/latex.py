@@ -1,0 +1,365 @@
+"""LaTeX/PDF configuration for IATI Sphinx Theme.
+
+This module provides default LaTeX styling for PDF output that applies
+IATI branding. Projects using this theme will automatically get these
+defaults, but can override any setting in their own conf.py.
+"""
+
+import functools
+import json
+import os
+from typing import Any, cast
+
+import sphinx.application
+import sphinx.config
+from sphinx.util import logging
+
+logger = logging.getLogger(__name__)
+
+
+@functools.lru_cache(maxsize=1)
+def get_brand_colors() -> dict[str, str]:
+    """Return the IATI brand colours as ``{name: "RRGGBB"}`` hex strings.
+
+    These are generated from the pinned ``iati-design-system`` package by
+    ``npm run build`` (see ``scripts/generate-brand-assets.mjs``) and written
+    to ``_generated/brand_colors.json`` - the same build step that compiles
+    the theme's CSS. Raises ``FileNotFoundError`` if that step hasn't run.
+    """
+    theme_dir = os.path.dirname(os.path.abspath(__file__))
+    colors_path = os.path.join(theme_dir, "_generated", "brand_colors.json")
+    with open(colors_path, encoding="utf-8") as f:
+        data = json.load(f)
+    return cast(dict[str, str], data["colors"])
+
+
+def hex_to_rgb(hex_color: str) -> str:
+    """Convert an ``"RRGGBB"`` hex string to a LaTeX ``"R,G,B"`` (0-255) triple."""
+    r = int(hex_color[0:2], 16)
+    g = int(hex_color[2:4], 16)
+    b = int(hex_color[4:6], 16)
+    return f"{r},{g},{b}"
+
+
+def get_latex_preamble() -> str:
+    """Return the LaTeX preamble with IATI branding."""
+    # Get the path to the logo
+    theme_dir = os.path.dirname(os.path.abspath(__file__))
+    logo_path = os.path.join(theme_dir, "static", "logo-colour.png")
+
+    # Brand colours are derived from the design system at build time, so the
+    # \definecolor lines are generated here rather than hard-coded.
+    color_definitions = "\n".join(
+        rf"\definecolor{{{name}}}{{HTML}}{{{value}}}"
+        for name, value in get_brand_colors().items()
+    )
+
+    return (
+        "\n"
+        "% IATI Brand Colors - generated from the pinned iati-design-system by\n"
+        "% scripts/generate-brand-assets.mjs; do not hand-edit.\n"
+        "\\usepackage{xcolor}\n"
+        + color_definitions
+        + r"""
+
+% Page geometry
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    margin=2.5cm,
+    top=3cm,
+    bottom=3cm
+}
+
+% Fonts (Hanken Grotesk / Nunito Sans / Roboto Mono) are loaded via the
+% "fontpkg" LaTeX element - see get_latex_fontpkg(). They require XeLaTeX
+% or LuaLaTeX, since fontspec cannot load .ttf files under pdfLaTeX.
+% \sffamily below refers to the Hanken Grotesk heading font set there.
+%
+% Known cosmetic gap: Sphinx marks wrapped long lines in code blocks with
+% U+2423 (OPEN BOX), which Roboto Mono doesn't include. LaTeX just skips
+% the missing glyph (a "Missing character" warning, not an error), so
+% wrapped code lines lose their wrap indicator but otherwise render fine.
+
+% Header and footer styling
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\textcolor{iatiorange}{\textbf{IATI}}}
+\fancyhead[R]{\sffamily\textcolor{iatigrey-light}{\leftmark}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Chapter and section heading styling
+\usepackage{titlesec}
+
+\titleformat{\chapter}[display]
+    {\normalfont\sffamily\huge\bfseries\color{iatiorange}}
+    {\chaptertitlename\ \thechapter}
+    {20pt}
+    {\Huge}
+
+\titleformat{\section}
+    {\normalfont\sffamily\Large\bfseries\color{iatiteal}}
+    {\thesection}
+    {1em}
+    {}
+
+\titleformat{\subsection}
+    {\normalfont\sffamily\large\bfseries\color{iatiteal}}
+    {\thesubsection}
+    {1em}
+    {}
+
+\titleformat{\subsubsection}
+    {\normalfont\sffamily\normalsize\bfseries\color{iatigrey}}
+    {\thesubsubsection}
+    {1em}
+    {}
+
+% Hyperlink styling
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=iatiteal,
+    urlcolor=iatiorange,
+    citecolor=iatigreen
+}
+
+% Custom title page
+% Sphinx's document classes call \sphinxmaketitle, not the standard
+% \maketitle, so that's the command we need to override.
+\makeatletter
+\renewcommand{\sphinxmaketitle}{
+    \begin{titlepage}
+        \centering
+        \vspace*{2cm}
+
+        % Logo
+        \IfFileExists{"""
+        + logo_path.replace("\\", "/")
+        + r"""}{
+            \includegraphics[width=0.5\textwidth]{"""
+        + logo_path.replace("\\", "/")
+        + r"""}
+        }{}
+
+        \vspace{2cm}
+
+        % Title
+        {\sffamily\Huge\bfseries\color{iatiorange}\@title\par}
+
+        \vspace{1cm}
+
+        % Author/Release info
+        {\Large\color{iatigrey}\@author\par}
+
+        \vspace{0.5cm}
+
+        {\large\color{iatigrey-light}\@date\par}
+
+        \vfill
+
+        % Footer text
+        {\color{iatigrey-light}\textit{International Aid Transparency Initiative}\par}
+    \end{titlepage}
+}
+\makeatother
+
+% Table styling
+\usepackage{booktabs}
+\usepackage{array}
+\renewcommand{\arraystretch}{1.3}
+
+% Code block styling (via sphinxsetup in latex_elements)
+"""
+    )
+
+
+def get_latex_fontpkg() -> str:
+    """Return the "fontpkg" LaTeX element, loading IATI's brand fonts.
+
+    Sphinx inserts this after loading fontspec itself (via the "fontenc"
+    element, which it sets automatically for XeLaTeX/LuaLaTeX). It only
+    has to bind font families to the files in fonts/ - it doesn't need to
+    \\usepackage{fontspec} itself.
+    """
+    theme_dir = os.path.dirname(os.path.abspath(__file__))
+    fonts_dir = os.path.join(theme_dir, "fonts")
+
+    def font_path(family: str) -> str:
+        return os.path.join(fonts_dir, family).replace("\\", "/") + "/"
+
+    return (
+        r"""
+\setmainfont{NunitoSans}[
+    Path = """
+        + font_path("NunitoSans")
+        + r""",
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    ItalicFont = *-Italic,
+    BoldFont = *-Bold,
+    BoldItalicFont = *-BoldItalic,
+]
+\setsansfont{HankenGrotesk}[
+    Path = """
+        + font_path("HankenGrotesk")
+        + r""",
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    ItalicFont = *-Italic,
+    BoldFont = *-Bold,
+    BoldItalicFont = *-BoldItalic,
+]
+\setmonofont{RobotoMono}[
+    Path = """
+        + font_path("RobotoMono")
+        + r""",
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    ItalicFont = *-Italic,
+    BoldFont = *-Bold,
+]
+"""
+    )
+
+
+def get_latex_elements() -> dict[str, Any]:
+    """Return the LaTeX elements configuration dictionary.
+
+    Returns:
+        Dictionary suitable for Sphinx's latex_elements configuration.
+    """
+    colors = get_brand_colors()
+    teal = hex_to_rgb(colors["iatiteal"])
+    orange = hex_to_rgb(colors["iatiorange"])
+    green = hex_to_rgb(colors["iatigreen"])
+    purple = hex_to_rgb(colors["iatipurple"])
+
+    return {
+        "papersize": "a4paper",
+        "pointsize": "11pt",
+        # These PDFs are downloaded and read on screen, not printed and
+        # bound - so drop the book-style defaults (mirrored two-sided
+        # margins, and blank pages inserted to force chapters onto a
+        # right-hand page).
+        "extraclassoptions": "oneside,openany",
+        "preamble": get_latex_preamble(),
+        "fontpkg": get_latex_fontpkg(),
+        "fncychap": "",  # Disable default chapter styling, use custom
+        "sphinxsetup": (
+            # Admonition styling. Border colours are derived from the
+            # design-system palette (see get_brand_colors); the background
+            # tints are hand-picked light washes of each border colour and
+            # are not themselves design-system tokens.
+            f"noteBorderColor={{RGB}}{{{teal}}},"
+            "noteborder=1pt,"
+            "noteBgColor={RGB}{240,248,250},"
+            f"warningBorderColor={{RGB}}{{{orange}}},"
+            "warningborder=1pt,"
+            "warningBgColor={RGB}{255,245,244},"
+            f"tipBorderColor={{RGB}}{{{green}}},"
+            "tipborder=1pt,"
+            "tipBgColor={RGB}{240,253,250},"
+            f"importantBorderColor={{RGB}}{{{purple}}},"
+            "importantborder=1pt,"
+            "importantBgColor={RGB}{248,244,253},"
+            # Verbatim/code styling
+            "VerbatimColor={RGB}{248,248,248},"
+            "VerbatimBorderColor={RGB}{200,200,200},"
+            "verbatimborder=0.5pt,"
+            # Sphinx tolerates a code line overflowing its box by up to 3
+            # characters' width before it force-wraps mid-word - dropping
+            # that to 0 stops long unbroken strings (e.g. URLs) spilling
+            # past the box edge.
+            "verbatimmaxoverfull=0"
+        ),
+        # Babel language setting
+        "babel": r"\usepackage[english]{babel}",
+    }
+
+
+def configure_latex_defaults(
+    app: "sphinx.application.Sphinx", config: "sphinx.config.Config"
+) -> None:
+    """Configure default LaTeX elements for IATI branding.
+
+    This is called during the 'config-inited' event. It sets default
+    values for latex_elements while allowing user overrides.
+
+    Args:
+        app: The Sphinx application instance.
+        config: The Sphinx configuration object.
+    """
+    # Our brand fonts are loaded via fontspec, which only runs under
+    # XeLaTeX/LuaLaTeX. Default to lualatex unless a project has already
+    # chosen an engine other than Sphinx's own pdflatex default.
+    #
+    # LuaLaTeX, not XeLaTeX: Sphinx's force-wrap mechanism for long
+    # unbroken tokens (e.g. URLs in code blocks) silently fails under
+    # XeLaTeX - it measures the line as needing a wrap, but the wrapped
+    # text still overflows the box uncorrected. The same content wraps
+    # correctly under LuaLaTeX, which fontspec supports identically.
+    # The brand colours (and logo) are generated from iati-design-system by
+    # `npm run build`. If that step hasn't run - e.g. a fresh checkout that
+    # only builds HTML - skip PDF branding rather than crash the build. This
+    # runs on config-inited for every builder, HTML included.
+    try:
+        theme_defaults = get_latex_elements()
+    except FileNotFoundError:
+        logger.warning(
+            "IATI brand assets not found - PDF branding skipped. Run "
+            "`npm run build` to generate them (see README). HTML output is "
+            "unaffected."
+        )
+        return
+
+    if config.latex_engine == "pdflatex":
+        config.latex_engine = "lualatex"
+
+    # Get user's existing latex_elements or create empty dict
+    # Note: At config-inited time, latex_elements may be an empty dict {}
+    user_elements = dict(config.latex_elements) if config.latex_elements else {}
+
+    # Merge defaults with user config (user config takes precedence)
+    merged = {}
+    for key, value in theme_defaults.items():
+        if key not in user_elements:
+            merged[key] = value
+        elif key == "preamble":
+            # For preamble, prepend theme defaults to user's preamble
+            # so user can override/extend
+            user_preamble = user_elements.get("preamble", "")
+            merged["preamble"] = value + "\n" + user_preamble
+        elif key == "sphinxsetup":
+            # For sphinxsetup, append user's settings to theme defaults
+            user_setup = user_elements.get("sphinxsetup", "")
+            if user_setup:
+                merged["sphinxsetup"] = value + "," + user_setup
+            else:
+                merged[key] = value
+        else:
+            merged[key] = user_elements[key]
+
+    # Copy over any user settings we didn't touch
+    for key, value in user_elements.items():
+        if key not in merged:
+            merged[key] = value
+
+    # Update the config - update in place rather than replacing
+    # This ensures the changes persist in Sphinx's config system
+    config.latex_elements.clear()
+    config.latex_elements.update(merged)
+
+
+def setup(app: "sphinx.application.Sphinx") -> None:
+    """Set up the LaTeX configuration extension.
+
+    This function is called if this module is loaded as a Sphinx extension.
+
+    Args:
+        app: The Sphinx application instance.
+    """
+    app.connect("config-inited", configure_latex_defaults)

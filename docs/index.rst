@@ -16,6 +16,7 @@ IATI Sphinx Theme
    :hidden:
 
    examples/videos
+   Images <examples/images>
 
 .. toctree::
    :titlesonly:
@@ -23,6 +24,7 @@ IATI Sphinx Theme
    :caption: Development
    :hidden:
 
+   pdf-styling
    kitchen-sink/index
 
 Installation
@@ -109,6 +111,57 @@ The text to use in the breadcrumb and tool navigation components.
 
 Items to include in the header tool nav bar.
 Defaults to a single item that links back to the site's homepage.
+
+Page ordering
+=============
+
+Pages appear - in the sidebar, and everywhere else described below - in the order they're listed inside :code:`toctree::` directives. Order is **not** derived from alphabetical order, file names, or folder structure; it's simply the order documents are listed in the toctree source.
+
+.. code-block:: rst
+
+  .. toctree::
+
+     installation
+     configuration
+     faq
+
+Here, :code:`installation` comes before :code:`configuration` because it's listed first - regardless of what the files are named or where they live on disk.
+
+Grouping pages under a caption
+-------------------------------
+
+A page can contain more than one :code:`toctree::` directive. Each one can have its own :code:`:caption:`, which becomes a labelled group in the sidebar, in the order the :code:`toctree::` directives themselves appear on the page. This theme's own docs use exactly this pattern:
+
+.. code-block:: rst
+
+  .. toctree::
+     :caption: Examples
+
+     examples/videos
+
+  .. toctree::
+     :caption: Development
+
+     pdf-styling
+     kitchen-sink/index
+
+Where else page order matters
+-------------------------------
+
+The same toctree order drives more than just the sidebar:
+
+- **PDF chapters** - since :code:`docs/conf.py`'s :code:`latex_documents` starts from :code:`index`, the PDF build walks the same toctree to decide chapter order. A page moved earlier in the toctree moves earlier in the PDF too.
+- **Previous/Next links** - when the :code:`show_relations` theme option is enabled, the footer's Previous/Next links are computed by flattening the toctree, so they follow the same order.
+
+Two things toctree order does **not** affect:
+
+- **Breadcrumbs** - these always show ``Home`` and the current page's title, regardless of how deeply a page is nested in a toctree.
+- **Search results** - these are ranked by Sphinx's search index, not by toctree position.
+
+A :code:`:glob:` gotcha
+------------------------
+
+The :code:`:glob:` option lets a toctree entry be a wildcard pattern (for example :code:`kitchen-sink/*`), and *only* wildcard entries are sorted alphabetically. If you write out explicit filenames under :code:`:glob:` rather than a wildcard, as this theme's own kitchen sink index does, they still follow plain source order - it's easy to assume :code:`:glob:` alphabetises everything, but it only applies to genuine wildcards.
 
 Custom roles
 ============

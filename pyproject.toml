@@ -4,10 +4,16 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "iati-sphinx-theme"
-version="3.1.1"
+version="3.2.0"
 readme = "README.md"
 dynamic = ["description"]
-dependencies = []
+dependencies = [
+    # Converts SVG images to PDF during the LaTeX/PDF build. Sphinx's LaTeX
+    # builder only accepts PDF/PNG/JPEG, so without this SVGs are silently
+    # dropped from PDF output (issue #43). The theme registers the rsvg-convert
+    # backend in setup(); the base package pulls no heavy dependencies.
+    "sphinxcontrib-svg2pdfconverter",
+]
 
 [project.optional-dependencies]
 docs = [
@@ -35,6 +41,9 @@ profile = "black"
 
 [tool.flake8]
 max-line-length = 88
+per-file-ignores = """
+    docs/conf.py: E402
+"""
 
 [tool.mypy]
 strict = true
