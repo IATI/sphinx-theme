@@ -1,25 +1,24 @@
-// Generate the PDF/LaTeX brand assets from the pinned iati-design-system.
+// Generate the design-system assets the theme can't take straight from CSS.
 //
-// The HTML theme already consumes the design system directly (via Vite +
-// `@use "pkg:iati-design-system"`), but the PDF pipeline needs the same
-// brand values in forms LaTeX can use: colours as hex codes and the logo as
-// a raster image. Rather than hand-copy those into the repo (where they
-// drift out of sync), we derive them here from whichever iati-design-system
-// version is pinned in package.json, at build time.
+// The design system's contract is dist/css/iati.css: the theme compiles it in
+// via Sass and uses its custom properties with var(). This script derives the
+// few things var() can't cover, from whichever version is pinned in
+// package.json:
 //
-// This runs as part of `npm run build`, so it happens everywhere the CSS is
-// already built: local dev, Read the Docs (pre_install), and the PyPI
-// publish workflow (before `python -m build`). The outputs are gitignored
-// build artifacts, exactly like the compiled CSS.
+// - brand_colors.json: hex colours for LaTeX (see iati_sphinx_theme/latex.py)
+// - styles/_generated/_breakpoints.scss: CSS variables can't be used in @media
+// - logo-colour.svg/.png: the PNG is for the PDF title page
+// - iati.js: served from _static instead of a CDN
 //
-// Fonts are deliberately NOT handled here: the design system doesn't ship
-// font binaries at all - it hot-links Google Fonts from the browser - and
-// LaTeX needs real files on disk. Those .ttf files are vendored in
-// iati_sphinx_theme/fonts/ on purpose; see iati_sphinx_theme/latex.py.
+// It runs as part of `npm run build`; the outputs are gitignored.
+//
+// Fonts are not handled here: the design system hot-links Google Fonts, and
+// LaTeX needs real files, so they are vendored in iati_sphinx_theme/fonts/.
 
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import postcss from "postcss";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, "..");
@@ -31,47 +30,51 @@ const dsRoot = resolve(repoRoot, "node_modules", DS_PKG);
 const dsVersion = JSON.parse(
   readFileSync(resolve(dsRoot, "package.json"), "utf8")
 ).version;
-
-// --- Colours ---------------------------------------------------------------
-//
-// Map each brand colour the theme uses to a design-system token. When the
-// palette is re-pointed upstream, change the *token* on the right - never a
-// hex code, which lives only in the design system.
-const COLOR_TOKENS = {
-  iatiorange: "orange-60",
-  "iatiorange-light": "orange-50",
-  iatiteal: "teal-90",
-  "iatiteal-light": "teal-70",
-  iatigrey: "grey-90",
-  "iatigrey-light": "grey-60",
-  iatigreen: "green-70",
-  iatipurple: "purple-70",
-};
-
-const colorScss = readFileSync(
-  resolve(dsRoot, "src/scss/tokens/_color.scss"),
-  "utf8"
-);
+const DS_CSS = "dist/css/iati.css";
 
 const tokens = {};
-for (const match of colorScss.matchAll(
-  /\$color-([\w-]+):\s*#([0-9a-fA-F]{6})\s*;/g
-)) {
-  tokens[match[1]] = match[2].toUpperCase();
-}
+postcss.parse(readFileSync(resolve(dsRoot, DS_CSS), "utf8")).walkRules(
+  (rule) => {
+    if (rule.selector !== ":root") return;
+    rule.walkDecls(/^--/, (decl) => {
+      tokens[decl.prop.slice(2)] = decl.value.trim();
+    });
+  }
+);
 
-const colors = {};
-for (const [name, token] of Object.entries(COLOR_TOKENS)) {
-  const hex = tokens[token];
-  if (!hex) {
+function token(name, neededFor) {
+  const value = tokens[name];
+  if (value === undefined) {
     throw new Error(
-      `Design-system token $color-${token} (needed for "${name}") was not ` +
-        `found in ${DS_PKG}@${dsVersion} tokens/_color.scss. The palette may ` +
-        `have been restructured upstream - update COLOR_TOKENS in ` +
+      `--${name} (needed for ${neededFor}) is not defined on :root in ` +
+        `${DS_PKG}@${dsVersion} ${DS_CSS}. Update the token names in ` +
         `scripts/generate-brand-assets.mjs.`
     );
   }
-  colors[name] = hex;
+  return value;
+}
+
+// --- Colours ---------------------------------------------------------------
+//
+// To re-point a brand colour, change the token on the right, never a hex code.
+const COLOR_TOKENS = {
+  iatiorange: "color-orange-60",
+  "iatiorange-light": "color-orange-50",
+  iatiteal: "color-teal-90",
+  "iatiteal-light": "color-teal-70",
+  iatigrey: "color-grey-90",
+  "iatigrey-light": "color-grey-60",
+  iatigreen: "color-green-70",
+  iatipurple: "color-purple-70",
+};
+
+const colors = {};
+for (const [name, tokenName] of Object.entries(COLOR_TOKENS)) {
+  const value = token(tokenName, `"${name}"`);
+  if (!/^#[0-9a-fA-F]{6}$/.test(value)) {
+    throw new Error(`--${tokenName} is "${value}", not a #RRGGBB colour.`);
+  }
+  colors[name] = value.slice(1).toUpperCase();
 }
 
 const generatedDir = resolve(repoRoot, "iati_sphinx_theme/_generated");
@@ -82,7 +85,7 @@ writeFileSync(
     {
       _comment:
         `GENERATED by scripts/generate-brand-assets.mjs from ` +
-        `${DS_PKG}@${dsVersion} (tokens/_color.scss). Do not edit by hand; ` +
+        `${DS_PKG}@${dsVersion} (${DS_CSS}). Do not edit by hand; ` +
         `run "npm run build".`,
       source_package: DS_PKG,
       source_version: dsVersion,
@@ -96,12 +99,26 @@ console.log(
   `brand_colors.json: ${Object.keys(colors).length} colours from ${DS_PKG}@${dsVersion}`
 );
 
+// --- Breakpoints -------------------------------------------------------------
+const BREAKPOINT_TOKENS = ["screen-lg"];
+
+const stylesGeneratedDir = resolve(repoRoot, "styles/_generated");
+mkdirSync(stylesGeneratedDir, { recursive: true });
+writeFileSync(
+  resolve(stylesGeneratedDir, "_breakpoints.scss"),
+  `// GENERATED by scripts/generate-brand-assets.mjs from ${DS_PKG}@${dsVersion}.\n` +
+    BREAKPOINT_TOKENS.map(
+      (name) => `$${name}: ${token(name, "a Sass @media breakpoint")};\n`
+    ).join("")
+);
+console.log(
+  `_breakpoints.scss: ${BREAKPOINT_TOKENS.length} breakpoints from ${DS_PKG}@${dsVersion}`
+);
+
 // --- Logo ------------------------------------------------------------------
 //
-// The design system ships the logo as SVG. The HTML header uses the SVG
-// directly; the PDF title page needs a raster image, because LaTeX's
-// \includegraphics can't take an SVG without an Inkscape toolchain. We copy
-// the SVG and rasterise a PNG from the same source.
+// LaTeX's \includegraphics can't take an SVG without Inkscape, so the PDF
+// title page uses a PNG rasterised from the same source.
 const sharp = (await import("sharp")).default;
 const staticDir = resolve(repoRoot, "iati_sphinx_theme/static");
 mkdirSync(staticDir, { recursive: true });
@@ -117,3 +134,7 @@ await sharp(logoSvgSrc, { density: 300 })
 console.log(
   `logo-colour.svg + logo-colour.png (${LOGO_PNG_WIDTH}px) from ${DS_PKG}@${dsVersion}`
 );
+
+// --- JavaScript ------------------------------------------------------------
+copyFileSync(resolve(dsRoot, "dist/js/iati.js"), resolve(staticDir, "iati.js"));
+console.log(`iati.js from ${DS_PKG}@${dsVersion}`);
