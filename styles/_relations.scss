@@ -1,8 +1,6 @@
-@use "pkg:iati-design-system" as *;
-
 .relations {
   display: flex;
-  padding: $padding-block;
+  padding: var(--padding-block);
 
   & > * {
     flex: 1;
