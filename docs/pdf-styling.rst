@@ -225,18 +225,22 @@ If :code:`rsvg-convert` is missing, SVGs are simply skipped in the PDF (with a w
 Keeping in sync with the design system
 ========================================
 
-The HTML theme consumes the `IATI design system <https://github.com/IATI/iati-design-system>`_ directly: it's an npm dependency, pinned in :code:`package.json`, and the CSS is compiled from it by :code:`npm run build`. The PDF pipeline needs the same branding, but in forms LaTeX can use - colours as hex codes, the logo as a raster image - so rather than hand-copying them (where they drift out of sync), it derives them from the *same pinned design system* at build time.
+The theme consumes the `IATI design system <https://github.com/IATI/iati-design-system>`_ as an npm dependency, pinned in :code:`package.json`. Its contract is the compiled stylesheet, :code:`dist/css/iati.css`: :code:`npm run build` compiles it into the theme's CSS via Sass (so the theme can :code:`@extend` its classes), and the theme's own styles use its CSS custom properties with :code:`var()`, e.g. :code:`var(--color-grey-60)`.
 
-:code:`scripts/generate-brand-assets.mjs`, which runs as part of :code:`npm run build`, produces:
+A few things can't be taken straight from CSS, so :code:`scripts/generate-brand-assets.mjs`, which runs as part of :code:`npm run build`, derives them from the custom properties on :code:`:root` in :code:`iati.css` and from the package's assets:
 
-- :code:`iati_sphinx_theme/_generated/brand_colors.json` - the brand colours, read from the design system's :code:`tokens/_color.scss`. :code:`latex.py` reads this to emit the :code:`\definecolor` lines and the admonition border colours.
+- :code:`iati_sphinx_theme/_generated/brand_colors.json` - the brand colours as hex codes. :code:`latex.py` reads this to emit the :code:`\definecolor` lines and the admonition border colours.
+- :code:`styles/_generated/_breakpoints.scss` - screen breakpoints as Sass variables, because CSS custom properties can't be used in :code:`@media` conditions.
 - :code:`iati_sphinx_theme/static/logo-colour.svg` and :code:`logo-colour.png` - copied and rasterised from the design system's logo SVG. The HTML header uses the SVG; the PDF title page uses the PNG. (SVG images in docs *content* are converted to PDF automatically - see `SVG images`_ - but the title-page logo deliberately uses the pre-rasterised PNG.)
+- :code:`iati_sphinx_theme/static/iati.js` - the design system's JavaScript, served from :code:`_static` rather than a CDN so it always matches the pin.
+
+If a token the theme needs is missing from :code:`iati.css`, the script fails and names it.
 
 These are gitignored build artifacts, exactly like the compiled CSS - they aren't committed to this repository. They're regenerated wherever the CSS already is: local development, Read the Docs (in its :code:`pre_install` step), and the PyPI publish workflow (before :code:`python -m build`, so they're baked into the released package).
 
-**The pinned version is the unit of sync.** Builds are reproducible against whatever :code:`iati-design-system` version is pinned in :code:`package.json`; brand values only change when someone bumps that pin deliberately - the same moment the CSS would change. To adopt design-system updates, bump the pin and rebuild.
+**The pinned version is the unit of sync.** Builds are reproducible against whatever :code:`iati-design-system` version is pinned in :code:`package.json`; brand values only change when someone bumps that pin deliberately - the same moment the CSS would change.
 
-To catch the design system moving ahead of the pin, the :code:`.github/workflows/design-system-drift.yml` workflow runs on a schedule: it regenerates the brand assets against the latest published :code:`iati-design-system` and fails (with a warning annotation) if the colours or logo would differ from the pinned version, as a prompt to bump the pin.
+Dependabot (:code:`.github/dependabot.yml`) opens a pull request bumping the pin whenever a new :code:`iati-design-system` is published, including major versions. CI on that pull request is the compatibility check: it builds against the new version, and the job summary shows a diff of the generated assets against :code:`main`, so a reviewer can see any brand-value changes before merging.
 
 The fonts are the exception to all of this - see `Brand fonts`_ for why they're vendored rather than generated.
 
