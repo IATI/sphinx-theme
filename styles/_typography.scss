@@ -1,4 +1,4 @@
-@use "pkg:iati-design-system" as ds;
+@use "pkg:iati-design-system/dist/css/iati";
 
 .rubric {
   font-weight: bold;
@@ -6,29 +6,29 @@
 }
 
 .line-block {
-  margin: ds.$padding-block 0;
+  margin: var(--padding-block) 0;
 
   .line-block {
     margin: 0;
-    padding-left: ds.$padding-block;
+    padding-left: var(--padding-block);
   }
 }
 
 .headerlink {
-  color: ds.$color-grey-30;
+  color: var(--color-grey-30);
   text-decoration: none;
-  padding-left: ds.$padding-block;
+  padding-left: var(--padding-block);
   font-size: 0.8em;
-  font-weight: ds.$font-weight-body;
+  font-weight: var(--font-weight-body);
 
   &:hover {
-    color: ds.$color-grey-90;
+    color: var(--color-grey-90);
   }
 }
 
 .guilabel {
-  background-color: ds.$color-teal-10;
-  border: 1px solid ds.$color-teal-70;
+  background-color: var(--color-teal-10);
+  border: 1px solid var(--color-teal-70);
   font-size: 0.6em;
   padding: 0 0.2em;
   border-radius: 0.2em;
@@ -39,10 +39,10 @@
 .sig {
   @extend .iati-code;
   display: inline-block;
-  color: ds.$color-grey-60;
+  color: var(--color-grey-60);
 
   .sig-name {
-    color: ds.$color-grey-90;
+    color: var(--color-grey-90);
     font-weight: bold;
   }
 }
@@ -59,8 +59,8 @@ pre {
 }
 
 span.linenos {
-  color: ds.$color-grey-50;
-  margin-right: ds.$padding-block;
+  color: var(--color-grey-50);
+  margin-right: var(--padding-block);
 }
 
 .highlight {

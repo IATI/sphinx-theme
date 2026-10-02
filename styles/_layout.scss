@@ -1,4 +1,4 @@
-@use "pkg:iati-design-system" as *;
+@use "_generated/breakpoints" as *;
 
 .iati-main {
   display: flex;
@@ -19,5 +19,5 @@
 
 .documentwrapper {
   flex-grow: 1;
-  padding: $padding-block;
+  padding: var(--padding-block);
 }

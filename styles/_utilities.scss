@@ -1,7 +1,5 @@
 /* Generic utilities which Sphinx expects to be available */
 
-@use "pkg:iati-design-system" as *;
-
 // List Styles
 
 ol.upperalpha {
@@ -33,13 +31,13 @@ ol.lowerroman {
 .align-right {
   float: right;
   clear: right;
-  margin-left: $padding-block;
+  margin-left: var(--padding-block);
 }
 
 .align-left {
   float: left;
   clear: left;
-  margin-right: $padding-block;
+  margin-right: var(--padding-block);
 }
 
 .align-center {

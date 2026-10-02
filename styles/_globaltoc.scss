@@ -1,8 +1,9 @@
-@use "pkg:iati-design-system" as *;
+@use "pkg:iati-design-system/dist/css/iati";
+@use "_generated/breakpoints" as *;
 
 .globaltoc {
   @extend .iati-card;
-  margin: $padding-block;
+  margin: var(--padding-block);
   overflow-y: auto;
 
   @media (min-width: $screen-lg) {
@@ -21,7 +22,7 @@
     }
 
     &:not(:first-of-type) {
-      margin-top: $padding-block;
+      margin-top: var(--padding-block);
     }
   }
 

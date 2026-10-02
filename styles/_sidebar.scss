@@ -1,4 +1,4 @@
-@use "pkg:iati-design-system" as *;
+@use "pkg:iati-design-system/dist/css/iati";
 
 aside.sidebar {
   @extend .iati-card;
@@ -6,7 +6,7 @@ aside.sidebar {
   clear: both;
   width: 250px;
   overflow: auto;
-  margin-left: $padding-block;
+  margin-left: var(--padding-block);
 
   & .sidebar-title {
     @extend .iati-card__title;
