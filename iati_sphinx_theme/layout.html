@@ -4,8 +4,11 @@
   {% if theme_plausible_domain %}
     <script defer data-domain="{{ theme_plausible_domain }}" src="https://plausible.io/js/script.js"></script>
   {% endif %}
-  <script src="https://cdn.jsdelivr.net/npm/iati-design-system@3.4.0/dist/js/iati.js"></script>
+  <script src="{{ pathto('_static/iati.js', 1) }}"></script>
 {% endblock %}
+
+{#- iati-design-system 5.x scopes its styles under this class. #}
+{%- block body_tag %}<body class="iati-design-system--enabled">{% endblock %}
 
 {%- block header %}
   {%- include "header.html" %}
